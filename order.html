@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>預訂房間 - Jumeirah Marsa Al Arab</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/page-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .order-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .order-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .order-summary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .room-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 40px;
+            padding: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+        }
+        .room-image {
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            max-height: 320px;
+            aspect-ratio: 3/2;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+            margin: 0 auto;
+            display: block;
+        }
+        .room-details {
+            width: 100%;
+            max-width: 480px;
+            text-align: left;
+            margin: 0 auto;
+        }
+        .room-details h2 {
+            margin: 24px 0 12px 0;
+            font-size: 2.1rem;
+            color: #f9c74f;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        .room-details p {
+            margin: 0 0 8px 0;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 1.15rem;
+            line-height: 1.8;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .room-info {
+                padding: 14px;
+                gap: 16px;
+            }
+            .room-image {
+                max-width: 100vw;
+                max-height: 200px;
+                border-radius: 16px;
+            }
+            .room-details {
+                max-width: 100vw;
+                text-align: left;
+            }
+            .room-details h2 {
+                font-size: 1.3rem;
+                margin: 16px 0 8px 0;
+                text-align: left;
+            }
+            .room-details p {
+                font-size: 1rem;
+                text-align: left;
+            }
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            margin-bottom: 15px;
+            color: #f9c74f;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f9c74f;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .date-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .guest-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .price-breakdown {
+            margin-bottom: 20px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+        }
+
+        .price-item.total {
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 15px;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #f9c74f;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #f9c74f, #f8961e);
+            border: none;
+            border-radius: 8px;
+            color: #1a1a1a;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(249, 199, 79, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .nights-info {
+            background: rgba(249, 199, 79, 0.1);
+            border: 1px solid rgba(249, 199, 79, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .nights-info h4 {
+            color: #f9c74f;
+            margin: 0 0 5px 0;
+        }
+
+        .nights-info p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .order-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .date-inputs,
+            .guest-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .room-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+                padding: 20px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 15px;
+                backdrop-filter: blur(5px);
+            }
+
+            .room-image {
+                width: 100%;
+                height: 180px;
+                border-radius: 16px;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            }
+
+            .room-image:active {
+                transform: scale(0.98);
+            }
+
+            .room-details h2 {
+                font-size: 1.6rem;
+                margin-bottom: 12px;
+            }
+
+            .room-details p {
+                font-size: 0.95rem;
+            }
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message h3 {
+            color: #4caf50;
+            margin-bottom: 10px;
+        }
+
+        /* 讓訂單頁 select 樣式和首頁一致 */
+        .order-form select,
+        .order-form select:focus {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.08rem;
+            padding: 0 36px 0 24px;
+            height: 48px;
+            min-width: 140px;
+            outline: none;
+            appearance: none;
+            border-radius: 0;
+            position: relative;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 18px 18px;
+        }
+        .order-form select:focus {
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+        }
+        .order-form select option {
+            color: #222;
+            background: #fff;
+        }
+        .order-form select:-moz-focusring {
+            color: #fff;
+            text-shadow: 0 0 0 #fff;
+        }
+        .order-form select::-ms-expand {
+            display: none;
+        }
+        @media (max-width: 900px) {
+            .order-form select {
+                font-size: 16px !important;
+                padding: 12px 16px !important;
+                height: 44px !important;
+                border-radius: 10px !important;
+                background: rgba(255,255,255,0.1);
+                border: 1px solid rgba(255,255,255,0.2);
+                color: #fff;
+                -webkit-appearance: none;
+                appearance: none;
+                text-align: left;
+            }
+            .order-form select:focus {
+                background: rgba(255,255,255,0.15);
+                border-color: rgba(255,255,255,0.4);
+                outline: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="site-wrapper" class="site-wrapper">
+        <div class="overlay"></div>
+        <header>
+            <div class="header-left">
+                <div class="hamburger-icon" id="hamburger-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <button class="search-button"></button>
+            </div>
+            <div class="header-center">
+                <a href="index.html" class="main-logo">JUMEIRAH</a>
+            </div>
+            <div class="header-right">
+                <a href="login.html" class="header-link user-btn"><img src="images/user.png" alt="登入"></a>
+                <a href="bookings.html" class="header-link bag-btn"><img src="images/bag.png" alt="預訂"></a>
+            </div>
+        </header>
+
+        <div class="mobile-nav" id="mobile-nav">
+            <div class="mobile-nav-header">
+                <a href="index.html" class="main-logo">JUMEIRAH</a>
+                <button class="close-btn" id="close-nav-btn" aria-label="Close menu"></button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="index.html">Jumeirah Marsa Al Arab</a>
+                <a href="accommodation.html">所有住宿</a>
+                <a href="about.html">關於我們</a>
+                <a href="bookings.html" class="footer-link">我的預訂</a>
+                <a href="login.html" class="footer-link">登入</a>
+            </nav>
+        </div>
+
+        <!-- 搜尋彈出視窗 -->
+        <div class="search-modal" id="search-modal">
+            <div class="search-modal-header">
+                <h2>搜尋</h2>
+                <button class="close-btn" id="close-search-btn" aria-label="Close search"></button>
+            </div>
+            <div class="search-modal-content">
+                <div class="search-input-container">
+                    <input type="text" id="search-input" placeholder="搜尋房型、設施、服務..." autocomplete="off">
+                    <button class="search-submit-btn" id="search-submit-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results">
+ 
+                </div>
+                <div class="search-suggestions" id="search-suggestions">
+                    <h3>熱門搜尋</h3>
+                    <div class="suggestion-tags">
+                        <span class="suggestion-tag" data-search="海景">海景客房</span>
+                        <span class="suggestion-tag" data-search="套房">豪華套房</span>
+                        <span class="suggestion-tag" data-search="家庭">家庭房</span>
+                        <span class="suggestion-tag" data-search="露台">露台客房</span>
+                        <span class="suggestion-tag" data-search="總統">總統套房</span>
+                        <span class="suggestion-tag" data-search="濱海">濱海客房</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <div class="order-container">
+                <div class="order-form">
+                        <img src="" alt="房間圖片" class="room-image" id="room-image">
+                        <div class="room-details">
+                            <h2 id="room-title">選擇房型</h2>
+                            <p id="room-description">請選擇您想要的房型</p>
+                        </div>
+
+
+                    <form id="booking-form">
+                        <div class="form-section">
+                            <h3><i class="fas fa-calendar-alt"></i> 入住日期</h3>
+                            <div class="date-inputs">
+                                <div class="form-group">
+                                    <label for="checkin-date">入住日期</label>
+                                    <input type="date" id="checkin-date" name="checkin-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="checkout-date">退房日期</label>
+                                    <input type="date" id="checkout-date" name="checkout-date" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3><i class="fas fa-users"></i> 客人資訊</h3>
+                            <div class="guest-inputs">
+                                <div class="form-group">
+                                    <label for="adults">成人數量</label>
+                                    <select id="adults" name="adults" required>
+                                        <option value="1">1位成人</option>
+                                        <option value="2">2位成人</option>
+                                        <option value="3">3位成人</option>
+                                        <option value="4">4位成人</option>
+                                        <option value="5">5位成人</option>
+                                        <option value="6">6位成人</option>
+                                        <option value="7">7位成人</option>
+                                        <option value="8">8位成人</option>
+                                        <option value="9">9位成人</option>
+                                        <option value="10">10位成人</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="children">兒童數量</label>
+                                    <select id="children" name="children">
+                                        <option value="0">0位兒童</option>
+                                        <option value="1">1位兒童</option>
+                                        <option value="2">2位兒童</option>
+                                        <option value="3">3位兒童</option>
+                                        <option value="4">4位兒童</option>
+                                        <option value="5">5位兒童</option>
+                                        <option value="6">6位兒童</option>
+                                        <option value="7">7位兒童</option>
+                                        <option value="8">8位兒童</option>
+                                        <option value="9">9位兒童</option>
+                                        <option value="10">10位兒童</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3><i class="fas fa-user"></i> 聯絡資訊</h3>
+                            <div class="form-group">
+                                <label for="guest-name">姓名</label>
+                                <input type="text" id="guest-name" name="guest-name" placeholder="請輸入您的姓名" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guest-email">電子郵件</label>
+                                <input type="email" id="guest-email" name="guest-email" placeholder="請輸入您的電子郵件" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guest-phone">電話號碼</label>
+                                <input type="tel" id="guest-phone" name="guest-phone" placeholder="請輸入您的電話號碼" required>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3><i class="fas fa-comment"></i> 特殊要求</h3>
+                            <div class="form-group">
+                                <label for="special-requests">特殊要求（可選）</label>
+                                <textarea id="special-requests" name="special-requests" rows="4" placeholder="請告訴我們任何特殊要求或偏好"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="loading" id="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>正在處理您的預訂...</p>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submit-btn">
+                            <i class="fas fa-check"></i> 確認預訂
+                        </button>
+                    </form>
+                    <div class="success-message" id="success-message" style="display: none;">
+                        <h3><i class="fas fa-check-circle"></i> 預訂成功！</h3>
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <h3><i class="fas fa-receipt"></i> 訂單摘要</h3>
+                    
+                    <div class="nights-info" id="nights-info" style="display: none;">
+                        <h4>住宿天數</h4>
+                        <p id="nights-count">0 晚</p>
+                    </div>
+
+                    <div class="price-breakdown">
+                        <div class="price-item">
+                            <span>房費</span>
+                            <span id="room-price">NT$ 0</span>
+                        </div>
+                        <div class="price-item">
+                            <span>服務費</span>
+                            <span id="service-fee">NT$ 0</span>
+                        </div>
+                        <div class="price-item">
+                            <span>稅金</span>
+                            <span id="tax">NT$ 0</span>
+                        </div>
+                        <div class="price-item total">
+                            <span>總計</span>
+                            <span id="total-price">NT$ 0</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                        <h4 style="color: #f9c74f; margin-bottom: 10px;">包含服務</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 5px; color: rgba(255, 255, 255, 0.8);">
+                                <i class="fas fa-wifi" style="color: #f9c74f; margin-right: 8px;"></i>免費WiFi
+                            </li>
+                            <li style="margin-bottom: 5px; color: rgba(255, 255, 255, 0.8);">
+                                <i class="fas fa-utensils" style="color: #f9c74f; margin-right: 8px;"></i>早餐
+                            </li>
+                            <li style="margin-bottom: 5px; color: rgba(255, 255, 255, 0.8);">
+                                <i class="fas fa-swimming-pool" style="color: #f9c74f; margin-right: 8px;"></i>游泳池使用
+                            </li>
+                            <li style="color: rgba(255, 255, 255, 0.8);">
+                                <i class="fas fa-concierge-bell" style="color: #f9c74f; margin-right: 8px;"></i>24小時服務
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 房型資料
+        const orderRoomData = {
+            'room1': {
+                title: '濱海豪華客房',
+                description: '享受寬敞的私人露台，俯瞰壯麗的濱海景致',
+                image: 'room/room1.webp',
+                basePrice: 15000
+            },
+            'room2': {
+                title: '濱海步道豪華客房',
+                description: '充滿自然光的現代空間，擁有壯觀的私人濱海步道景觀',
+                image: 'room/room2.webp',
+                basePrice: 16000
+            },
+            'room3': {
+                title: '濱海露台客房',
+                description: '金色色調與柔和設計，享受壯麗的濱海全景',
+                image: 'room/room3.webp',
+                basePrice: 17000
+            },
+            'room4': {
+                title: '海景豪華客房',
+                description: '開放式浴室設計，享受杜拜地標性海景',
+                image: 'room/room4.webp',
+                basePrice: 18000
+            },
+            'room5': {
+                title: '海景露台客房',
+                description: '專屬露台，欣賞杜拜地標性海景日落',
+                image: 'room/room5.webp',
+                basePrice: 19000
+            },
+            'room6': {
+                title: '海景家庭房',
+                description: '為家庭設計，享有壯觀海景與額外舒適設施',
+                image: 'room/room6.webp',
+                basePrice: 22000
+            },
+            'room7': {
+                title: '濱海豪華套房',
+                description: '寬敞的獨立客廳與露台，俯瞰壯麗濱海景致',
+                image: 'room/room7.webp',
+                basePrice: 28000
+            },
+            'room8': {
+                title: '濱海步道豪華套房',
+                description: '享受陽光與壯觀步道景觀的寬敞套房',
+                image: 'room/room8.webp',
+                basePrice: 30000
+            },
+            'room9': {
+                title: '濱海露台套房',
+                description: '適合家庭入住，享有壯觀濱海露台景觀',
+                image: 'room/room9.webp',
+                basePrice: 32000
+            },
+            'room10': {
+                title: '海景豪華套房',
+                description: '寬敞的獨立客廳與壯觀海景露台',
+                image: 'room/room10.webp',
+                basePrice: 35000
+            },
+            'room11': {
+                title: '海景全景客房',
+                description: '全景露台，俯瞰杜拜閃耀海岸線',
+                image: 'room/room11.webp',
+                basePrice: 38000
+            },
+            'room12': {
+                title: '海景露台套房',
+                description: '寬敞套房，享受室內外生活與壯觀海景',
+                image: 'room/room12.webp',
+                basePrice: 42000
+            },
+            'room13': {
+                title: '海景尊貴露台套房',
+                description: '尊貴套房，享有阿拉伯灣與私人濱海景觀',
+                image: 'room/room13.webp',
+                basePrice: 45000
+            },
+            'room14': {
+                title: '珍珠套房',
+                description: '兩臥室尊貴套房，適合高端活動與聚會',
+                image: 'room/room14.webp',
+                basePrice: 60000
+            },
+            'room15': {
+                title: '總統套房',
+                description: '兩臥室宮殿級套房，配備私人泳池與專屬管家',
+                image: 'room/room15.webp',
+                basePrice: 80000
+            },
+            'room16': {
+                title: '皇家套房',
+                description: '一臥室尊榮套房，享有壯觀全景與私人泳池',
+                image: 'room/room16.webp',
+                basePrice: 100000
+            },
+            'room17': {
+                title: '兩臥室濱海家庭房',
+                description: '兩間濱海客房連通，適合全家舒適入住',
+                image: 'room/room17.webp',
+                basePrice: 35000
+            },
+            'room18': {
+                title: '兩臥室海景家庭房',
+                description: '兩間海景客房連通，享受壯觀海景與寬敞空間',
+                image: 'room/room18.webp',
+                basePrice: 38000
+            },
+            'room19': {
+                title: '兩臥室濱海家庭套房',
+                description: '濱海豪華套房與客房連通，適合家庭或團體',
+                image: 'room/room19.webp',
+                basePrice: 45000
+            },
+            'room20': {
+                title: '兩臥室海景家庭套房',
+                description: '兩臥室套房，享有壯觀海景與寬敞露台',
+                image: 'room/room20.webp',
+                basePrice: 48000
+            },
+            'room21': {
+                title: '五臥室皇家套房',
+                description: '尊榮五臥室套房，配備私人泳池、酒吧與遊戲區',
+                image: 'room/room21.webp',
+                basePrice: 150000
+            }
+        };
+
+        // 從URL參數獲取房型
+        function getRoomFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomId = urlParams.get('room');
+            return roomId || 'room1'; // 預設房型
+        }
+
+        // 從URL參數獲取並填充表單數據
+        function fillFormFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // 填充房型選擇
+            const roomId = urlParams.get('room');
+            if (roomId) {
+                // 房型信息會在updateRoomInfo中處理
+            }
+            
+            // 填充成人數量
+            const adults = urlParams.get('adults');
+            if (adults) {
+                document.getElementById('adults').value = adults;
+            }
+            
+            // 填充兒童數量
+            const children = urlParams.get('children');
+            if (children) {
+                document.getElementById('children').value = children;
+            }
+            
+            // 填充入住日期
+            const checkinDate = urlParams.get('checkin');
+            if (checkinDate) {
+                document.getElementById('checkin-date').value = checkinDate;
+                // 設置退房日期的最小值
+                const nextDay = new Date(checkinDate);
+                nextDay.setDate(nextDay.getDate() + 1);
+                document.getElementById('checkout-date').min = nextDay.toISOString().split('T')[0];
+            }
+            
+            // 填充退房日期
+            const checkoutDate = urlParams.get('checkout');
+            if (checkoutDate) {
+                document.getElementById('checkout-date').value = checkoutDate;
+            }
+        }
+
+        // 載入已登入使用者的資料
+        async function loadUserData() {
+            try {
+                // 檢查是否有登入的使用者
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (!user || !user.email) {
+                    return; // 沒有登入使用者，不填充資料
+                }
+
+                // 從資料庫獲取最新的使用者資料
+                const response = await fetch(`http://localhost:3000/api/auth/user/${encodeURIComponent(user.email)}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const userData = result.user;
+                    
+                    // 填充聯絡資訊
+                    document.getElementById('guest-name').value = userData.name || '';
+                    document.getElementById('guest-email').value = userData.email || '';
+                    document.getElementById('guest-phone').value = userData.phone || '';
+                    
+                    console.log('已自動填充使用者資料:', userData);
+                }
+            } catch (error) {
+                console.error('載入使用者資料錯誤:', error);
+                // 如果API失敗，嘗試使用localStorage中的資料
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user) {
+                    document.getElementById('guest-name').value = user.name || '';
+                    document.getElementById('guest-email').value = user.email || '';
+                    document.getElementById('guest-phone').value = user.phone || '';
+                }
+            }
+        }
+
+        // 更新房型資訊
+        function updateRoomInfo() {
+            const roomId = getRoomFromURL();
+            const room = orderRoomData[roomId];
+            
+            if (room) {
+                document.getElementById('room-title').textContent = room.title;
+                document.getElementById('room-description').textContent = room.description;
+                document.getElementById('room-image').src = room.image;
+                document.getElementById('room-image').alt = room.title;
+            }
+        }
+
+        // 計算住宿天數
+        function calculateNights() {
+            const checkinDate = document.getElementById('checkin-date').value;
+            const checkoutDate = document.getElementById('checkout-date').value;
+            
+            if (checkinDate && checkoutDate) {
+                const checkin = new Date(checkinDate);
+                const checkout = new Date(checkoutDate);
+                const nights = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+                
+                if (nights > 0) {
+                    document.getElementById('nights-count').textContent = `${nights} 晚`;
+                    document.getElementById('nights-info').style.display = 'block';
+                    return nights;
+                }
+            }
+            
+            document.getElementById('nights-info').style.display = 'none';
+            return 0;
+        }
+
+        // 更新價格
+        function updatePrices() {
+            const roomId = getRoomFromURL();
+            const room = orderRoomData[roomId];
+            const nights = calculateNights();
+            
+            if (room && nights > 0) {
+                const basePrice = room.basePrice;
+                const totalRoomPrice = basePrice * nights;
+                const serviceFee = Math.round(totalRoomPrice * 0.1); // 10% 服務費
+                const tax = Math.round(totalRoomPrice * 0.05); // 5% 稅金
+                const total = totalRoomPrice + serviceFee + tax;
+                
+                document.getElementById('room-price').textContent = `NT$ ${totalRoomPrice.toLocaleString()}`;
+                document.getElementById('service-fee').textContent = `NT$ ${serviceFee.toLocaleString()}`;
+                document.getElementById('tax').textContent = `NT$ ${tax.toLocaleString()}`;
+                document.getElementById('total-price').textContent = `NT$ ${total.toLocaleString()}`;
+            } else {
+                document.getElementById('room-price').textContent = 'NT$ 0';
+                document.getElementById('service-fee').textContent = 'NT$ 0';
+                document.getElementById('tax').textContent = 'NT$ 0';
+                document.getElementById('total-price').textContent = 'NT$ 0';
+            }
+        }
+
+        // 設置最小日期為今天
+        function setMinDates() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkin-date').min = today;
+            document.getElementById('checkout-date').min = today;
+        }
+
+        // 處理入住日期變更
+        function handleCheckinChange() {
+            const checkinDate = document.getElementById('checkin-date').value;
+            if (checkinDate) {
+                const nextDay = new Date(checkinDate);
+                nextDay.setDate(nextDay.getDate() + 1);
+                document.getElementById('checkout-date').min = nextDay.toISOString().split('T')[0];
+            }
+            updatePrices();
+        }
+
+        // 處理退房日期變更
+        function handleCheckoutChange() {
+            updatePrices();
+        }
+
+        // 處理表單提交
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('success-message');
+            
+            // 顯示載入狀態
+            submitBtn.disabled = true;
+            loading.classList.add('show');
+            
+            try {
+                // 收集表單資料
+                const formData = {
+                    guestName: document.getElementById('guest-name').value,
+                    guestEmail: document.getElementById('guest-email').value,
+                    guestPhone: document.getElementById('guest-phone').value,
+                    checkinDate: document.getElementById('checkin-date').value,
+                    checkoutDate: document.getElementById('checkout-date').value,
+                    adults: document.getElementById('adults').value,
+                    children: document.getElementById('children').value,
+                    roomId: getRoomFromURL(),
+                    totalPrice: parseFloat(document.getElementById('total-price').textContent.replace('NT$ ', '').replace(',', '')),
+                    specialRequests: document.getElementById('special-requests').value
+                };
+                
+                // 發送API請求
+                const response = await fetch('http://localhost:3000/api/bookings/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // 成功
+                    loading.classList.remove('show');
+                    successMessage.classList.add('show');
+                    
+                    // 重置表單
+                    document.getElementById('booking-form').reset();
+                    setMinDates();
+                    updatePrices();
+                    
+                    // 3秒後隱藏成功訊息
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                        submitBtn.disabled = false;
+                    }, 3000);
+                } else {
+                    // 顯示錯誤訊息
+                    throw new Error(result.message || '訂單提交失敗');
+                }
+                
+            } catch (error) {
+                console.error('訂單提交錯誤:', error);
+                loading.classList.remove('show');
+                
+                // 顯示錯誤訊息
+                alert('訂單提交失敗：' + error.message);
+                submitBtn.disabled = false;
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateRoomInfo();
+            setMinDates();
+            fillFormFromURL(); // 填充從URL傳來的數據
+            loadUserData(); // 載入已登入使用者的資料
+            updatePrices();
+            
+            // 綁定事件
+            document.getElementById('checkin-date').addEventListener('change', handleCheckinChange);
+            document.getElementById('checkout-date').addEventListener('change', handleCheckoutChange);
+            document.getElementById('booking-form').addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+</body>
+</html> 

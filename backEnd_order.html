@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>backEnd</title>
+  <link rel="stylesheet" href="css/styles_BK.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+<main>
+    <div class="container-fluid ">
+        <div class="row ">
+          <!--左邊菜單  -->
+          <div class="col-2 p-0 ">
+            <div class="container text-center p-0">
+              <div class="row vh-100  flex-column  justify-content-center m-0 ">
+                <div class="col-4 p-3 p-0 h-0 d-flex">
+                  <a class="navbar-brand m-0 p-0 main-logo  ms-5" href="/backEnd.html">管理後臺</a>
+                </div>
+                <div class="col-8 m-0 p-3 h-75">
+                  <nav class="navbar navbar-expand-lg  justify-content-start my-5 ms-5">
+                    <ul class="navbar-nav flex-column align-items-start justify-content-start gap-5 my-5">
+                      <li class="nav-item  "><a href="/backEnd_room.html" class="my-2 py-3 description text-decoration-none">房間管理</a></li> 
+                      <li class="nav-item  "><a href="/backEnd_order.html" class="my-2 py-3 description text-decoration-none">訂單管理</a></li> 
+                      <li class="nav-item  "><a href="/backEnd_custmer.html" class="my-2 py-3 description text-decoration-none">顧客管理</a></li> 
+                      <li class="nav-item  "><a href="/backEnd_report.html" class="my-2 py-3 description text-decoration-none">營業報表</a></li> 
+                      
+                    </ul>
+                  </nav>  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 右邊版面 -->
+          <div class="col-10 ps-5">
+            <div class="container-fluid d-flex justify-content-between my-3 p-0 border-bottom-ST">
+                <div class="col-6 m-0 p-0 d-flex align-items-center">
+                  <h1 class=" m-0 p-0 main-logo">Dashboard 管理後台</h1>
+                </div>
+                <div class="col-6 m-0 p-0 ">
+                  <div class="d-flex align-items-center justify-content-end  me-3">                  
+                    <span class="m-0 text-light">將在</span>
+                    <span class="m-0 text-light" id="autoLogout">15:00</span>
+                    <span class="m-0 text-light mx-2">後自動登出</span>
+                    <button class="btn btn-outline-light mx-2" onclick="logout()">登出</button>
+                  </div>
+                </div>
+             </div>
+
+             <div class="container my-5">
+              <div class="row">
+                <div class="col-12 mb-5">
+                  <div class="card shadow-sm">
+                    <div class="card-body">
+                      <div class="container-fluid d-flex justify-content-between border-bottom fw-bold align-items-center">
+                        <h5 class="card-title m-0 text-center fw-bold">訂單狀態</h5>
+                        <button class="col-1 py-2 my-2  btn btn-outline-success btn-sm  float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">新增訂房</button>
+                      </div>
+                      <div class="table-responsive">
+                        <div class="container-fluid mt-2">
+                    
+                        <table class="table table-hover table-striped table-bordered align-middle text-center">
+                          <thead class="table-light">
+                            <tr class="align-middle">
+                              <th class="text-nowrap">訂單號碼</th>
+                              <th class="text-nowrap">房間編碼</th>
+                              <th class="text-nowrap">房型名稱</th>
+                              <th class="text-nowrap">顧客姓名</th>
+                              <th class="text-nowrap">顧客電話</th>
+                              <th class="text-nowrap">大人</th>
+                              <th class="text-nowrap">小孩</th>
+                              <th class="text-nowrap">入住日期</th>
+                              <th class="text-nowrap">退房日期</th>
+                              <th class="text-nowrap">特殊需求</th>
+                              <th class="text-nowrap">總金額</th>
+                              <th class="text-nowrap">訂單狀態</th>
+                              <th class="text-nowrap">編輯</th>
+                              <th class="text-nowrap">刪除</th>
+                            </tr>
+                          </thead>
+                          <tbody id="orderTable">
+        </div>
+    </div>
+
+    <!-- 需要增加顧客姓名電話 -->
+      <!-- 需要增加顧客姓名電話 -->
+        <!-- 需要增加顧客姓名電話 -->
+          <!-- 需要增加顧客姓名電話 -->
+            <!-- 需要增加顧客姓名電話 -->
+              <!-- 需要增加顧客姓名電話 -->
+                <!-- 需要增加顧客姓名電話 -->
+                  <!-- 需要增加顧客姓名電話 -->
+                    <!-- 需要增加顧客姓名電話 -->
+                      <!-- 需要增加顧客姓名電話 -->
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">新增訂房</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="roomType" class="form-label">房間類型</label>
+          <!-- 用select 加入要放的房間(DB裡的) -->
+          <select class="form-select" id="addRoomType" name="roomType" required>
+            <option value="" disabled selected>請選擇房間類型</option>
+            <!-- 這裡可以用 JavaScript 動態填充房間類型 -->
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">顧客姓名</label>
+          <input type="text" id="customerName" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">顧客電話</label>
+          <input type="text" id="customerPhone" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">顧客電子郵件</label>
+          <input type="email" id="customerEmail" class="form-control" name="imageUrl" required/>
+        </div>
+        <!-- 選日期 -->
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">入住日期</label>
+          <input type="date" id="checkInDate" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">退房日期</label>
+          <input type="date" id="checkOutDate" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">大人</label>
+          <input type="number" id="adults" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">小孩</label>
+          <input type="number" id="children" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">特殊需求</label>
+          <textarea class="form-control" id="description" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+          <span>價格 : </span>
+          <span id="price">---</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="addBookingBtn">新增訂房</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop2"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">編輯</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="editroomType" class="form-label">房間類型</label>
+          <select class="form-select" id="editroomType" name="roomType" required>
+            <option value="" disabled selected>請選擇房間類型</option>
+            <!-- 這裡用 JS 動態填充 -->
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">顧客姓名</label>
+          <input type="text" id="editcustomerName" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">顧客電話</label>
+          <input type="text" id="editcustomerPhone" class="form-control" name="imageUrl" required/>
+        </div>
+
+        <div class="mb-3">
+          <label for="editadults" class="form-label">大人</label>
+          <input type="number" id="editadults" class="form-control" name="adults" required/>
+        </div>
+        <div class="mb-3">
+          <label for="editchildren" class="form-label">小孩</label>
+          <input type="number" id="editchildren" class="form-control" name="children" required/>
+        </div>
+        <!-- 選日期 -->
+        <div class="mb-3">
+          <label for="editcheckInDate" class="form-label">入住日期</label>
+          <input type="date" id="editcheckInDate" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="editcheckOutDate" class="form-label">退房日期</label>
+          <input type="date" id="editcheckOutDate" class="form-control" name="imageUrl" required/>
+        </div>
+        <div class="mb-3">
+          <label for="editdescription" class="form-label">特殊需求</label>
+          <textarea class="form-control" id="editdescription" name="description"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="editpaymentStatus" class="form-label">付款狀態</label>
+          <select class="form-select" id="editpaymentStatus" name="paymentStatus">
+            <option value="unpaid">未付款</option>
+            <option value="paid">已付款</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <span>價格 : </span>
+          <span id="edit-price"></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary edit-close-btn" data-bs-dismiss="modal">關閉</button>
+        <button type="button" class="btn btn-primary edit-update-btn" >確認編輯</button>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+  <script src="bk_script.js"></script>
+<script>
+  const orderTable = document.getElementById('orderTable');
+//日期格式化---
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}/${month}/${day}`;
+}
+
+  async function renderOrderTable(){
+    const response = await fetch('/api/backend_order')
+    const data = await response.json()
+    orderTable.innerHTML = ''
+    data.forEach(item => {
+      if (!item.payment_status || item.payment_status.trim() === '' || item.payment_status === 'unpaid') {
+  item.payment_status = '未付款';
+} else {
+  item.payment_status = '已付款';
+}
+orderTable.innerHTML += `
+  <tr>
+    <td>${item.id}</td>
+    <td>${item.room_type_id}</td>
+    <td>${item.room_type_name}</td>
+    <td>${item.customer_name}</td>
+    <td>${item.customer_phone}</td>
+    <td>${item.adults}</td>
+    <td>${item.children}</td>
+    <td>${formatDate(item.check_in)}</td>
+    <td>${formatDate(item.check_out)}</td>
+    <td>${item.special_requests}</td>
+    <td>${item.total_price}</td>
+    <td>${item.payment_status}</td>
+    <td>
+      <button class="edit-btn btn btn-outline-success btn-sm me-1" 
+              data-id="${item.id}" 
+              data-bs-toggle="modal" 
+              data-bs-target="#staticBackdrop2">
+        編輯
+      </button>
+    </td>
+    <td>
+      <button class="delete-btn btn btn-outline-danger btn-sm" data-id="${item.id}">刪除</button>
+    </td>
+  </tr>
+`;
+
+    })
+  }
+  renderOrderTable()
+
+
+
+
+// 預先抓好 modal 表單欄位元素（注意 id 大小寫對齊）
+let editId = ''; 
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('edit-btn')) {
+    const id = e.target.getAttribute('data-id');
+    editId = id;
+    console.log(`編輯按鈕點擊事件已綁定 Id : ${editId}`);//按下去之後才會執行
+  }
+  });
+const editRoomType = document.getElementById('editroomType');
+const editCustomerName = document.getElementById('editcustomerName');
+const editCustomerPhone = document.getElementById('editcustomerPhone');
+const editAdults = document.getElementById('editadults');
+const editChildren = document.getElementById('editchildren');
+const editCheckInDate = document.getElementById('editcheckInDate');
+const editCheckOutDate = document.getElementById('editcheckOutDate');
+const editDescription = document.getElementById('editdescription');
+const editPrice = document.getElementById('edit-price'); // 注意這是 span 不是 input
+const editPaymentStatus = document.getElementById('editpaymentStatus');
+
+
+
+// 計算日期天數差並顯示價格
+function calculateDaysAndPrice(checkInStr, checkOutStr, price) {
+  const checkIn = new Date(checkInStr);
+  const checkOut = new Date(checkOutStr);
+  const days = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
+
+  if (!isNaN(days) && days > 0) {
+    return days * price;
+  }
+  return '價格計算錯誤';
+}
+
+// 編輯按鈕點擊事件
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('edit-btn')) {
+    const id = e.target.getAttribute('data-id');
+
+    try {
+      const response = await fetch('/api/backend_order/edit/' + id);
+      if (!response.ok) throw new Error('API 回傳錯誤');
+
+      const dataArr = await response.json();
+      const data = Array.isArray(dataArr) ? dataArr[0] : dataArr;
+
+      // 填入 modal 表單資料
+      editRoomType.value = data.room_type_name || '';
+      editCustomerName.value = data.customer_name || '';
+      editCustomerPhone.value = data.customer_phone || '';
+      editAdults.value = data.adults || 0;
+      editChildren.value = data.children || 0;
+      editCheckInDate.value = data.check_in?.split('T')[0] || '';
+      editCheckOutDate.value = data.check_out?.split('T')[0] || '';
+      editDescription.value = data.special_requests || '';
+      editPaymentStatus.value = data.payment_status || 'unpaid';
+
+      // 價格計算修正
+      editPrice.innerText = calculateDaysAndPrice(editCheckInDate.value, editCheckOutDate.value, data.price);
+
+      // 存放 ID（若有需要）
+      const editIdInput = document.getElementById('data-id');
+      if (editIdInput) editIdInput.value = data.id;
+
+    } catch (err) {
+      console.error('讀取資料失敗:', err);
+      alert('載入資料錯誤');
+    }
+  }
+});
+
+
+
+//刪除按鈕
+const deleteBtn = document.querySelector('.delete-btn');
+
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('delete-btn')) {
+    const id = e.target.getAttribute('data-id');
+    await deleteOrder(id);
+  }
+});
+
+async function deleteOrder(id){
+  try{
+    const response = await fetch('/api/backend_order/delete/' + id, {
+      method: 'DELETE'
+    });
+    if (!response.ok) throw new Error('刪除失敗');
+    alert('刪除成功');
+    renderOrderTable(); // 重新渲染表格
+  }catch(err){
+    console.error('刪除資料失敗:', err);
+    alert('刪除資料錯誤');
+  }
+}
+
+
+//編輯確認 更新訂單狀況
+document.querySelector('.edit-update-btn').addEventListener('click', async () => {
+  const id = editId; 
+  const roomType = editRoomType.value;
+  const customerName = editCustomerName.value;
+  const customerPhone = editCustomerPhone.value;
+  const adults = editAdults.value;
+  const children = editChildren.value;
+  const checkInDate = editCheckInDate.value;
+  const checkOutDate = editCheckOutDate.value;
+  const description = editDescription.value;
+  const paymentStatus = editPaymentStatus.value;
+
+  try {
+    const response = await fetch('/api/backend_order/update/' + id, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id,
+        room_type_name: roomType,
+        customer_name: customerName,
+        customer_phone: customerPhone,
+        adults,
+        children,
+        check_in: checkInDate,
+        check_out: checkOutDate,
+        special_requests: description,
+        payment_status: paymentStatus
+      })
+    });
+
+    if (!response.ok) throw new Error('更新失敗');
+
+    alert('更新成功');
+    document.querySelector('.edit-close-btn').click();
+    renderOrderTable(); // 重新渲染表格
+  } catch (err) {
+    console.error('更新資料失敗:', err);
+    alert('更新資料錯誤');
+  }
+});
+
+
+// 房型價格 
+// 計算房型價格
+
+window.onload = async function() {
+
+//將載入的房間選項放入select
+const editRoomType = document.getElementById('editroomType');
+const roomTypeSelect = document.getElementById('addRoomType');
+async function loadRoomTypes() {
+  // 從後端 API 獲取房型資料
+  try {
+    const response = await fetch('/api/backend_room/');
+    if (!response.ok) throw new Error('無法取得房型資料');
+    const data = await response.json();
+    console
+    // 清空選項
+    roomTypeSelect.innerHTML = '<option value="" disabled selected>請選擇房間類型</option>';
+    //editRoomType 預設原本的值
+    editRoomType.innerHTML = '<option value="" disabled selected>請選擇房間類型</option>';
+    // 填充選項
+    data.forEach(room => {
+      const option = document.createElement('option');
+      option.value = room.name; 
+      option.textContent = `${room.name} - ${room.price}元`; // 顯示房型名稱和價格
+      roomTypeSelect.appendChild(option);
+    });
+    // 填充編輯選項
+    data.forEach(room => {
+      const option = document.createElement('option');
+      option.value = room.name; 
+      option.textContent = room.name; // 顯示房型名稱
+      editRoomType.appendChild(option);
+    });
+
+
+
+  } catch (err) {
+    console.error('載入房型失敗:', err);
+  }
+};
+  await loadRoomTypes(); // 載入房型選項
+
+  // 當選擇房型時，更新價格顯示
+  roomTypeSelect.addEventListener('change', async () => {
+    const selectedRoomType = roomTypeSelect.value;
+    const checkInDate = document.getElementById('checkInDate').value;
+    const checkOutDate = document.getElementById('checkOutDate').value;
+    if (checkInDate && checkOutDate) {
+      const checkIn = new Date(checkInDate);
+      const checkOut = new Date(checkOutDate);
+      days = (checkOut - checkIn) / (1000 * 60 * 60 * 24); // 計算天數差
+      console.log('天數:', days);
+    }
+    function updatePrice() {
+  const roomTypeSelect = document.getElementById('addRoomType');
+  const selectedRoomType = roomTypeSelect.value;
+  const checkInDate = document.getElementById('checkInDate').value;
+  const checkOutDate = document.getElementById('checkOutDate').value;
+  let days = 0;
+  if (checkInDate && checkOutDate) {
+    const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
+    days = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
+    if (days < 1) days = 0;
+  }
+  const selectedOption = Array.from(roomTypeSelect.options).find(option => option.value === selectedRoomType);
+  const roomPrice = selectedOption ? parseFloat(selectedOption.textContent.split('-')[1].trim().replace('元', '')) : 0;
+  document.getElementById('price').innerText = (roomPrice * days) || 0;
+}
+
+// 當選擇房型、入住日期、退房日期時都要計算價格
+roomTypeSelect.addEventListener('change', updatePrice);
+document.getElementById('checkInDate').addEventListener('change', updatePrice);
+document.getElementById('checkOutDate').addEventListener('change', updatePrice);
+
+    updatePrice(); // 初始計算價格
+  });
+
+};
+//新增訂房按鈕 按下送出資料
+document.getElementById('addBookingBtn').addEventListener('click', async () => {
+  const roomType = document.getElementById('addRoomType').value;
+  const customerName = document.getElementById('customerName').value;
+  const customerPhone = document.getElementById('customerPhone').value;
+  const customerEmail = document.getElementById('customerEmail').value;
+  if (!roomType || !customerName || !customerPhone || !customerEmail) {
+    alert('請填寫所有必填欄位');
+    return;
+  }
+  const checkInDate = document.getElementById('checkInDate').value;
+  const checkOutDate = document.getElementById('checkOutDate').value;
+  const adults = document.getElementById('adults').value;
+  const children = document.getElementById('children').value;
+  const description = document.getElementById('description').value;
+  const price = document.getElementById('price').innerText; // 取得房型價格
+
+  try {
+    const response = await fetch('/api/backend_order/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        room_type_name: roomType,
+        customer_name: customerName,
+        customer_phone: customerPhone,
+        customer_email: customerEmail,
+        check_in: checkInDate,
+        check_out: checkOutDate,
+        adults,
+        children,
+        special_requests: description,
+        price: price
+      })
+    });
+
+    if (!response.ok) throw new Error('新增訂房失敗');
+
+    alert('新增訂房成功');
+    renderOrderTable(); // 重新渲染表格
+    document.querySelector('.btn-close').click(); // 關閉 modal
+  } catch (err) {
+    console.error('新增訂房失敗:', err);
+    alert('新增訂房錯誤');
+  }
+});
+
+
+
+// 選取日期--------------------------------------
+  const today = new Date().toISOString().split('T')[0]; // 取得今天的 yyyy-mm-dd 格式
+  document.getElementById("checkInDate").setAttribute("min", today);
+
+
+  // 限制退房日期不能小於入住日期
+ const checkInInput = document.getElementById("editcheckInDate");
+  const checkOutInput = document.getElementById("editcheckOutDate");
+
+  checkInInput.addEventListener("change", function () {
+    const checkInValue = this.value; // 取得入住日字串 "YYYY-MM-DD"
+    if (checkInValue) {
+      const checkInDate = new Date(checkInValue);
+      checkInDate.setDate(checkInDate.getDate() + 1); // 加一天
+      const minCheckOut = checkInDate.toISOString().split('T')[0]; // 轉換為 "YYYY-MM-DD" 格式
+      checkOutInput.min = minCheckOut;
+    }
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+
+    {
+    "CodeGPT.apiKey": "OpenAI",
+  "continue.experimental.agentModel": "gpt-4o-mini",  // ✅ Agent 用 Mini，可省 token
+  "continue.enableTabAutocomplete": true, // ✅ 開啟 Continue 的自動補齊
+  "editor.inlineSuggest.enabled": true,   // ✅ VS Code 原生支援 inline 補齊要打開
+  "continue.autodetectModel": false  // ✅ 關閉自動偵測（強制用你設定的模型）
+}

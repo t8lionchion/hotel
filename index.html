@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飯店官網</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body{overflow-x: hidden;}
+    </style>
+</head>
+<body class="homepage">
+    
+    <!-- 首页视差背景层 -->
+    <div class="homepage-parallax-bg" id="homepage-parallax-bg"></div>
+    
+    <div id="site-wrapper" class="site-wrapper">
+        <div class="overlay"></div>
+        <header>
+            <div class="header-left">
+                <div class="hamburger-icon" id="hamburger-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <button class="search-button"></button>
+            </div>
+            <div class="header-center">
+                <a href="index.html" class="main-logo">JUMEIRAH</a>
+            </div>
+            <div class="header-right">
+                <a href="login.html" class="header-link user-btn"><img src="images/user.png" alt="登入"></a>
+                <a href="bookings.html" class="header-link bag-btn"><img src="images/bag.png" alt="預訂"></a>
+            </div>
+        </header>
+
+        <div class="mobile-nav" id="mobile-nav">
+            <div class="mobile-nav-header">
+                <a href="index.html" class="main-logo">JUMEIRAH</a>
+                <button class="close-btn" id="close-nav-btn" aria-label="Close menu"></button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="index.html" class="active">Jumeirah Marsa Al Arab</a>
+ 
+                <a href="accommodation.html">所有住宿</a>
+                <a href="about.html">關於我們</a>
+                <a href="bookings.html" class="footer-link">我的預訂</a>
+                <a href="login.html" class="footer-link">登入</a>
+            </nav>
+           
+        </div>
+
+        <!-- 搜尋彈出視窗 -->
+        <div class="search-modal" id="search-modal">
+            <div class="search-modal-header">
+                <h2>搜尋</h2>
+                <button class="close-btn" id="close-search-btn" aria-label="Close search"></button>
+            </div>
+            <div class="search-modal-content">
+                <div class="search-input-container">
+                    <input type="text" id="search-input" placeholder="搜尋房型、設施、服務..." autocomplete="off">
+                    <button class="search-submit-btn" id="search-submit-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results">
+                    <!-- 搜尋結果將在這裡動態顯示 -->
+                </div>
+                <div class="search-suggestions" id="search-suggestions">
+                    <h3>熱門搜尋</h3>
+                    <div class="suggestion-tags">
+                        <span class="suggestion-tag" data-search="海景">海景客房</span>
+                        <span class="suggestion-tag" data-search="套房">豪華套房</span>
+                        <span class="suggestion-tag" data-search="家庭">家庭房</span>
+                        <span class="suggestion-tag" data-search="露台">露台客房</span>
+                        <span class="suggestion-tag" data-search="總統">總統套房</span>
+                        <span class="suggestion-tag" data-search="濱海">濱海客房</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <div id="info-panel" class="info-panel">
+                <p class="subtitle">杜拜奢華新地標</p>
+                <h1 class="title">Jumeirah</h1>
+                <p class="description">
+                    坐落於杜拜黃金半島，卓美亞港灣酒店（Jumeirah Marsa Al Arab）結合現代設計與阿拉伯傳統，為賓客打造獨一無二的奢華體驗。
+                </p>
+                <div class="actions">
+                    <a href="accommodation.html">
+                    <button class="discover-btn">所有住宿</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="navigation-panel">
+                <button class="nav-btn nav-btn-prev" id="nav-btn-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-btn nav-btn-next" id="nav-btn-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="navigation-grid">
+                    <a href="order.html?room=room4" class="nav-card">
+                        <img src="room/room23.webp" alt="海景豪華客房" />
+                        <div class="nav-overlay"></div>
+                        <div class="nav-content">
+                            <span class="nav-subtitle">現代設計與壯觀海景的完美結合</span>
+                            <h3 class="nav-title">海景豪華客房</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="order.html?room=room5" class="nav-card">
+                        <img src="room/room24.webp" alt="海景露台客房" />
+                        <div class="nav-overlay"></div>
+                        <div class="nav-content">
+                            <span class="nav-subtitle">專屬露台，欣賞杜拜地標性海景</span>
+                            <h3 class="nav-title">海景露台客房</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="order.html?room=room6" class="nav-card">
+                        <img src="room/room25.webp" alt="海景家庭房" />
+                        <div class="nav-overlay"></div>
+                        <div class="nav-content">
+                            <span class="nav-subtitle">為家庭設計，享有壯觀海景與舒適設施</span>
+                            <h3 class="nav-title">海景家庭房</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="order.html?room=room10" class="nav-card">
+                        <img src="room/room26.webp" alt="海景豪華套房" />
+                        <div class="nav-overlay"></div>
+                        <div class="nav-content">
+                            <span class="nav-subtitle">寬敞的套房空間，享有壯觀的海景視野</span>
+                            <h3 class="nav-title">海景豪華套房</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="order.html?room=room12" class="nav-card">
+                        <img src="room/room27.webp" alt="海景露台套房" />
+                        <div class="nav-overlay"></div>
+                        <div class="nav-content">
+                            <span class="nav-subtitle">專屬露台套房，享受杜拜地標性海景</span>
+                            <h3 class="nav-title">海景露台套房</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="order.html?room=room20" class="nav-card">
+                        <img src="room/room28.webp" alt="海景家庭套房" />
+                        <div class="nav-overlay"></div>
+                        <div class="nav-content">
+                            <span class="nav-subtitle">為家庭設計的寬敞套房，享有壯觀海景</span>
+                            <h3 class="nav-title">海景家庭套房</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="order.html?room=room15" class="nav-card">
+                        <img src="room/room29.webp" alt="總統套房" />
+                        <div class="nav-overlay"></div>
+                        <div class="nav-content">
+                            <span class="nav-subtitle">極致奢華體驗，杜拜地標性海景全景</span>
+                            <h3 class="nav-title">總統套房</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 訂房搜尋/篩選區塊 start -->
+            <div class="booking-search-bar booking-search-floating">
+              <select id="room-select">
+                <option value="">選擇房型</option>
+                <option value="room1">濱海豪華客房</option>
+                <option value="room2">濱海步道豪華客房</option>
+                <option value="room3">濱海露台客房</option>
+                <option value="room4">海景豪華客房</option>
+                <option value="room5">海景露台客房</option>
+                <option value="room6">海景家庭房</option>
+                <option value="room7">濱海豪華套房</option>
+                <option value="room8">濱海步道豪華套房</option>
+                <option value="room9">濱海露台套房</option>
+                <option value="room10">海景豪華套房</option>
+                <option value="room11">海景全景客房</option>
+                <option value="room12">海景露台套房</option>
+                <option value="room13">海景尊貴露台套房</option>
+                <option value="room14">珍珠套房</option>
+                <option value="room15">總統套房</option>
+                <option value="room16">皇家套房</option>
+                <option value="room17">兩臥室濱海家庭房</option>
+                <option value="room18">兩臥室海景家庭房</option>
+                <option value="room19">兩臥室濱海家庭套房</option>
+                <option value="room20">兩臥室海景家庭套房</option>
+                <option value="room21">五臥室皇家套房</option>
+              </select>
+              <select id="adults" name="adults">
+                <option value="1">1位成人</option>
+                <option value="2">2位成人</option>
+                <option value="3">3位成人</option>
+                <option value="4">4位成人</option>
+                <option value="5">5位成人</option>
+                <option value="6">6位成人</option>
+                <option value="7">7位成人</option>
+                <option value="8">8位成人</option>
+                <option value="9">9位成人</option>
+                <option value="10">10位成人</option>
+              </select>
+              <select id="children" name="children">
+                <option value="0">0位小孩</option>
+                <option value="1">1位小孩</option>
+                <option value="2">2位小孩</option>
+                <option value="3">3位小孩</option>
+                <option value="4">4位小孩</option>
+                <option value="5">5位小孩</option>
+                <option value="6">6位小孩</option>
+                <option value="7">7位小孩</option>
+                <option value="8">8位小孩</option>
+                <option value="9">9位小孩</option>
+                <option value="10">10位小孩</option>
+              </select>
+              <input type="date" id="checkin-date" name="checkin-date" min="" placeholder="入住日期">
+              <input type="date" id="checkout-date" name="checkout-date" min="" placeholder="退房日期">
+              <button class="booking-search-btn" onclick="handleBookingSearch()">預定</button>
+            </div>
+            <!-- 訂房搜尋/篩選區塊 end -->
+
+        </main>
+    </div>
+
+    <!-- Masonry 瀑布流圖片動畫區塊 start -->
+    <section class="masonry-gallery">
+      <a href="order.html?room=room1" class="masonry-card">
+        <img src="room/room11.webp" alt="濱海豪華客房">
+        <div class="masonry-info">
+          <h3>濱海豪華客房</h3>
+          <p>享受私人露台，俯瞰壯麗的濱海景致</p>
+        </div>
+      </a>
+      <a href="order.html?room=room2" class="masonry-card">
+        <img src="room/room2.webp" alt="濱海步道豪華客房">
+        <div class="masonry-info">
+          <h3>濱海步道豪華客房</h3>
+          <p>充滿自然光的現代空間，擁有壯觀的景觀</p>
+        </div>
+      </a>
+      <a href="order.html?room=room3" class="masonry-card">
+        <img src="room/room8.webp" alt="濱海露台客房">
+        <div class="masonry-info">
+          <h3>濱海露台客房</h3>
+          <p>金色調與柔和設計，享受壯麗的濱海全景</p>
+        </div>
+      </a>
+      <a href="order.html?room=room4" class="masonry-card">
+        <img src="room/room26.webp" alt="海景豪華客房">
+        <div class="masonry-info">
+          <h3>海景豪華客房</h3>
+          <p>開放式浴室設計，享受地標性海景</p>
+        </div>
+      </a>
+      <a href="order.html?room=room5" class="masonry-card">
+        <img src="room/room10.webp" alt="海景露台客房">
+        <div class="masonry-info">
+          <h3>海景露台客房</h3>
+          <p>專屬露台，欣賞杜拜地標性海景日落</p>
+        </div>
+      </a>
+      <a href="order.html?room=room6" class="masonry-card">
+        <img src="room/room6.webp" alt="海景家庭房">
+        <div class="masonry-info">
+          <h3>海景家庭房</h3>
+          <p>為家庭設計與額外舒適設施</p>
+        </div>
+      </a>
+    </section>
+    <!-- Masonry 瀑布流圖片動畫區塊 end -->
+
+    <!-- 緩慢顯示背景圖片區塊 start -->
+    <section class="slow-reveal-section">
+        <div class="slow-reveal-bg" id="slow-reveal-bg"></div>
+    </section>
+    <!-- 緩慢顯示背景圖片區塊 end -->
+
+    <!-- Footer 區塊 start -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Jumeirah Marsa Al Arab</h3>
+                <p>坐落於杜拜黃金半島，卓美亞港灣酒店（Jumeirah Marsa Al Arab）</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>服務</h4>
+                <ul>
+                    <li><a href="#">餐飲體驗</a></li>
+                    <li><a href="#">獨家優惠</a></li>
+                    <li><a href="about.html">關於我們</a></li>
+                    <li><a href="bookings.html">線上預訂</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>住宿</h4>
+                <ul>
+                    <li><a href="accommodation.html">海景豪華客房</a></li>
+                    <li><a href="accommodation.html">海景露台客房</a></li>
+                    <li><a href="accommodation.html">海景豪華套房</a></li>
+                    <li><a href="accommodation.html">總統套房</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>聯絡</h4>
+                <ul>
+                    <li>0905-827361</li>
+                    <li>chengfu0624@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aaron</p>
+        </div>
+    </footer>
+    <!-- Footer 區塊 end -->
+
+    <script src="script.js"></script>
+    <script>
+        // 設置最小日期為今天
+        function setMinDates() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkin-date').min = today;
+            document.getElementById('checkout-date').min = today;
+        }
+
+        // 處理入住日期變更
+        function handleCheckinChange() {
+            const checkinDate = document.getElementById('checkin-date').value;
+            if (checkinDate) {
+                const nextDay = new Date(checkinDate);
+                nextDay.setDate(nextDay.getDate() + 1);
+                document.getElementById('checkout-date').min = nextDay.toISOString().split('T')[0];
+            }
+        }
+
+        // 處理預訂搜尋
+        function handleBookingSearch() {
+            const roomSelect = document.getElementById('room-select');
+            const adults = document.getElementById('adults').value;
+            const children = document.getElementById('children').value;
+            const checkinDate = document.getElementById('checkin-date').value;
+            const checkoutDate = document.getElementById('checkout-date').value;
+            
+            // 檢查是否選擇了房型
+            if (!roomSelect.value) {
+                alert('請選擇房型');
+                return;
+            }
+            
+            // 檢查是否選擇了入住日期
+            if (!checkinDate) {
+                alert('請選擇入住日期');
+                return;
+            }
+            
+            // 檢查是否選擇了退房日期
+            if (!checkoutDate) {
+                alert('請選擇退房日期');
+                return;
+            }
+            
+            // 構建URL參數
+            const params = new URLSearchParams();
+            params.append('room', roomSelect.value);
+            params.append('adults', adults);
+            params.append('children', children);
+            params.append('checkin', checkinDate);
+            params.append('checkout', checkoutDate);
+            
+            // 跳轉到訂單頁面
+            window.location.href = `order.html?${params.toString()}`;
+        }
+
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            setMinDates();
+            
+            // 綁定入住日期變更事件
+            document.getElementById('checkin-date').addEventListener('change', handleCheckinChange);
+        });
+    </script>
+</body>
+</html> 

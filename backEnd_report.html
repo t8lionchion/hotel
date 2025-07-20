@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>backEnd</title>
+  <link rel="stylesheet" href="css/styles_BK.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+<main>
+    <div class="container-fluid ">
+        <div class="row ">
+          <!--左邊菜單  -->
+          <div class="col-2 p-0 ">
+            <div class="container text-center p-0">
+              <div class="row vh-100  flex-column  justify-content-center m-0 ">
+                <div class="col-4 p-3 p-0 h-0 d-flex">
+                  <a class="navbar-brand m-0 p-0 main-logo  ms-5" href="/backEnd.html">管理後臺</a>
+                </div>
+                <div class="col-8 m-0 p-3 h-75">
+                  <nav class="navbar navbar-expand-lg  justify-content-start my-5 ms-5">
+                    <ul class="navbar-nav flex-column align-items-start justify-content-start gap-5 my-5">
+                      <li class="nav-item  "><a href="/backEnd_room.html" class="my-2 py-3 description text-decoration-none">房間管理</a></li> 
+                      <li class="nav-item  "><a href="/backEnd_order.html" class="my-2 py-3 description text-decoration-none">訂單管理</a></li> 
+                      <li class="nav-item  "><a href="/backEnd_custmer.html" class="my-2 py-3 description text-decoration-none">顧客管理</a></li> 
+                      <li class="nav-item  "><a href="/backEnd_report.html" class="my-2 py-3 description text-decoration-none">營業報表</a></li> 
+                      
+                    </ul>
+                  </nav> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 右邊版面 -->
+          <div class="col-10 ps-5">
+            <div class="container-fluid d-flex justify-content-between my-3 p-0 border-bottom-ST">
+                <div class="col-6 m-0 p-0 d-flex align-items-center">
+                  <h1 class=" m-0 p-0 main-logo">Dashboard 管理後台</h1>
+                </div>
+                <div class="col-6 m-0 p-0 ">
+                  <div class="d-flex align-items-center justify-content-end  me-3">                  
+                    <span class="m-0 text-light">將在</span>
+                    <span class="m-0 text-light" id="autoLogout">15:00</span>
+                    <span class="m-0 text-light mx-2">後自動登出</span>
+                    <button class="btn btn-outline-light mx-2" onclick="logout()">登出</button>
+                  </div>
+                </div>
+             </div>
+
+             <div class="container my-5">
+              <div class="row">
+                <div class="col-12 mb-5">
+                  <h5 class="py-2 my-2 text-center main-logo">營業報表</h5>
+                </div>
+
+                <!-- <div class="col-3 offset-2">
+                  <div class="card">
+                    <div class="card-header"> 房間使用率 圓餅圖</div>
+                    <div class="card-body">
+                      <canvas id="myChart_2" width="400" height="200"></canvas>
+                    </div>                   
+                  </div>
+                </div>
+                <div class="col-3 offset-2">
+                  <div class="card">
+                    <div class="card-header">熱門房間 圓餅圖</div>
+                    <div class="card-body">
+                      <canvas id="myChart_3" width="400" height="200"></canvas>
+                    </div>                   
+                  </div>
+                </div> -->
+
+              </div>
+             </div>
+
+             <div class="container my-5">
+              <div class="row">
+                <div class="col-12 mb-5">
+                  <p class="py-2 my-2 text-center main-logo">營收查詢</p>
+                  <div class="d-flex justify-content-center align-items-center gap-3">
+                    <p class="m-0 text-light fs-5">請選擇查詢日期</p>
+                    <input type="date" id="checkDate-start">
+                    <input type="date" id="checkDate-end">
+                    <button class="btn btn-light">查詢</button>
+                  </div>
+                  
+                </div>
+                <div class="col-10 offset-1">
+                  <div class="card">
+                    <div class="card-body p-1 d-flex justify-content-center">
+                      <div class="col-10">
+                  <canvas id="myChart_4"></canvas>
+                  <!-- 長條圖比較 預設近30日 -->
+                </div>
+                </div>
+                </div>
+              </div>
+              </div>
+             </div>
+
+          </div>
+        </div>
+    </div>
+</main>
+
+<script>
+// const ctx1 = document.getElementById('myChart_1');
+// new Chart(ctx1, {
+//   type: 'doughnut',
+//   data: {
+//     labels: ['Red', 'Blue',],
+//     datasets: [{
+//       label: '# of Votes',
+//       data: [12, 19],
+//     }]
+//   },
+// });
+
+// const ctx2 = document.getElementById('myChart_2');
+// new Chart(ctx2, {
+//   type: 'doughnut',
+//   data: {
+//     labels: ['Red', 'Blue',],
+//     datasets: [{
+//       label: '# of Votes',
+//       data: [12, 19],
+//     }]
+//   },
+// });
+
+//營收長條圖
+async function getsalesData() {
+    const response = await fetch('/api/backend_report');
+    const data = await response.json();
+    const labels = data.map(item => item.check_in); // 假設資料中有 month 欄位
+    const salesData = data.map(item => item.total_price);
+    const payment_status = data.map(item => item.payment_status);
+
+    // return { labels, salesData, payment_status };
+    console.log("---------");
+    console.log(data);
+    console.log("---------");
+}
+
+getsalesData();
+
+
+
+const ctx4 = document.getElementById('myChart_4');
+
+new Chart(ctx4, {
+    type: 'bar',
+    data: {
+                labels: ['一月', '二月', '三月', '四月', '五月'], // X 軸標籤
+                datasets: [{
+                    label: '銷售額', // 資料集的名稱
+                    data: [1200, 1900, 3000, 5000, 2300], // 實際資料
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)' // 藍色
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)'
+                    ]
+                }]
+            },
+    options: {
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true
+            }
+        }
+    }
+});
+ 
+
+
+  // 選取日期--------------------------------------
+ const checkInInput = document.getElementById("checkDate-start");
+  const checkOutInput = document.getElementById("checkDate-end");
+
+  checkInInput.addEventListener("change", function () {
+    const checkInValue = this.value; // 取得入住日字串 "YYYY-MM-DD"
+    if (checkInValue) {
+      const checkInDate = new Date(checkInValue);
+      checkInDate.setDate(checkInDate.getDate() + 1); // 加一天
+      const minCheckOut = checkInDate.toISOString().split('T')[0];
+      checkOutInput.min = minCheckOut;
+    }
+  });
+
+</script>
+<script src="bk_script.js"></script>
+</body>
+</html>

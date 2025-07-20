@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>所有住宿 - Jumeirah Marsa Al Arab</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/page-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div id="site-wrapper" class="site-wrapper">
+        <div class="overlay"></div>
+        <header>
+            <div class="header-left">
+                <div class="hamburger-icon" id="hamburger-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <button class="search-button"></button>
+            </div>
+            <div class="header-center">
+                <a href="index.html" class="main-logo">JUMEIRAH</a>
+            </div>
+            <div class="header-right">
+                <a href="login.html" class="header-link user-btn"><img src="images/user.png" alt="登入"></a>
+                <a href="bookings.html" class="header-link bag-btn"><img src="images/bag.png" alt="預訂"></a>
+            </div>
+        </header>
+
+        <div class="mobile-nav" id="mobile-nav">
+            <div class="mobile-nav-header">
+                <a href="index.html" class="main-logo">JUMEIRAH</a>
+                <button class="close-btn" id="close-nav-btn" aria-label="Close menu"></button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="index.html">Jumeirah Marsa Al Arab</a>
+                <a href="accommodation.html" class="active">所有住宿</a>
+                <a href="about.html">關於我們</a>
+                <a href="bookings.html" class="footer-link">我的預訂</a>
+                <a href="login.html" class="footer-link">登入</a>
+            </nav>
+        </div>
+
+        <!-- 搜尋彈出視窗 -->
+        <div class="search-modal" id="search-modal">
+            <div class="search-modal-header">
+                <h2>搜尋</h2>
+                <button class="close-btn" id="close-search-btn" aria-label="Close search"></button>
+            </div>
+            <div class="search-modal-content">
+                <div class="search-input-container">
+                    <input type="text" id="search-input" placeholder="搜尋房型、設施、服務..." autocomplete="off">
+                    <button class="search-submit-btn" id="search-submit-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results">
+                    <!-- 搜尋結果將在這裡動態顯示 -->
+                </div>
+                <div class="search-suggestions" id="search-suggestions">
+                    <h3>熱門搜尋</h3>
+                    <div class="suggestion-tags">
+                        <span class="suggestion-tag" data-search="海景">海景客房</span>
+                        <span class="suggestion-tag" data-search="套房">豪華套房</span>
+                        <span class="suggestion-tag" data-search="家庭">家庭房</span>
+                        <span class="suggestion-tag" data-search="露台">露台客房</span>
+                        <span class="suggestion-tag" data-search="總統">總統套房</span>
+                        <span class="suggestion-tag" data-search="濱海">濱海客房</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="main-content accommodation-page">
+            
+
+            <div class="accommodation-grid">
+                <div class="accommodation-card">
+                    <img src="room/room1.webp" alt="濱海豪華客房">
+                    <div class="card-content">
+                        <h3>濱海豪華客房</h3>
+                        <p>享受寬敞的私人露台，俯瞰壯麗的濱海景致，體驗現代阿拉伯奢華。</p>
+                        <ul>
+                            <li>45-55 平方米</li>
+                            <li>濱海景觀</li>
+                            <li>特大雙人床或雙床</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room1'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room2.webp" alt="濱海步道豪華客房">
+                    <div class="card-content">
+                        <h3>濱海步道豪華客房</h3>
+                        <p>充滿自然光的現代空間，擁有壯觀的私人濱海步道景觀。</p>
+                        <ul>
+                            <li>45-55 平方米</li>
+                            <li>步道景觀</li>
+                            <li>特大雙人床或雙床</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room2'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room3.webp" alt="濱海露台客房">
+                    <div class="card-content">
+                        <h3>濱海露台客房</h3>
+                        <p>金色色調與柔和設計，享受壯麗的濱海全景。</p>
+                        <ul>
+                            <li>45-55 平方米</li>
+                            <li>濱海全景</li>
+                            <li>特大雙人床或雙床</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room3'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room4.webp" alt="海景豪華客房">
+                    <div class="card-content">
+                        <h3>海景豪華客房</h3>
+                        <p>開放式浴室設計，享受杜拜地標性海景。</p>
+                        <ul>
+                            <li>45-55 平方米</li>
+                            <li>海景</li>
+                            <li>特大雙人床或雙床</li>
+                            <li>開放式浴室</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room4'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room5.webp" alt="海景露台客房">
+                    <div class="card-content">
+                        <h3>海景露台客房</h3>
+                        <p>專屬露台，欣賞杜拜地標性海景日落。</p>
+                        <ul>
+                            <li>45-55 平方米</li>
+                            <li>海景露台</li>
+                            <li>特大雙人床或雙床</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room5'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room6.webp" alt="海景家庭房">
+                    <div class="card-content">
+                        <h3>海景家庭房</h3>
+                        <p>為家庭設計，享有壯觀海景與額外舒適設施。</p>
+                        <ul>
+                            <li>60-70 平方米</li>
+                            <li>家庭專屬設施</li>
+                            <li>海景</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room6'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room7.webp" alt="濱海豪華套房">
+                    <div class="card-content">
+                        <h3>濱海豪華套房</h3>
+                        <p>寬敞的獨立客廳與露台，俯瞰壯麗濱海景致。</p>
+                        <ul>
+                            <li>80-100 平方米</li>
+                            <li>獨立客廳</li>
+                            <li>濱海景觀</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room7'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room8.webp" alt="濱海步道豪華套房">
+                    <div class="card-content">
+                        <h3>濱海步道豪華套房</h3>
+                        <p>享受陽光與壯觀步道景觀的寬敞套房。</p>
+                        <ul>
+                            <li>80-100 平方米</li>
+                            <li>步道景觀</li>
+                            <li>獨立客廳</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room8'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room9.webp" alt="濱海露台套房">
+                    <div class="card-content">
+                        <h3>濱海露台套房</h3>
+                        <p>適合家庭入住，享有壯觀濱海露台景觀。</p>
+                        <ul>
+                            <li>100-120 平方米</li>
+                            <li>家庭專屬設施</li>
+                            <li>濱海露台</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room9'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room10.webp" alt="海景豪華套房">
+                    <div class="card-content">
+                        <h3>海景豪華套房</h3>
+                        <p>寬敞的獨立客廳與壯觀海景露台。</p>
+                        <ul>
+                            <li>100-120 平方米</li>
+                            <li>獨立客廳</li>
+                            <li>海景露台</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn" onclick="window.location.href='order.html?room=room10'">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room11.webp" alt="海景全景客房">
+                    <div class="card-content">
+                        <h3>海景全景客房</h3>
+                        <p>全景露台，俯瞰杜拜閃耀海岸線。</p>
+                        <ul>
+                            <li>60-80 平方米</li>
+                            <li>全景露台</li>
+                            <li>海景</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room12.webp" alt="海景露台套房">
+                    <div class="card-content">
+                        <h3>海景露台套房</h3>
+                        <p>寬敞套房，享受室內外生活與壯觀海景。</p>
+                        <ul>
+                            <li>120-150 平方米</li>
+                            <li>室內外生活空間</li>
+                            <li>海景露台</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room13.webp" alt="海景尊貴露台套房">
+                    <div class="card-content">
+                        <h3>海景尊貴露台套房</h3>
+                        <p>尊貴套房，享有阿拉伯灣與私人濱海景觀。</p>
+                        <ul>
+                            <li>150-180 平方米</li>
+                            <li>尊貴設施</li>
+                            <li>阿拉伯灣景觀</li>
+                            <li>私人露台</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room14.webp" alt="珍珠套房">
+                    <div class="card-content">
+                        <h3>珍珠套房</h3>
+                        <p>兩臥室尊貴套房，適合高端活動與聚會。</p>
+                        <ul>
+                            <li>200-250 平方米</li>
+                            <li>兩臥室</li>
+                            <li>私人宴會空間</li>
+                            <li>專屬禮賓服務</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room15.webp" alt="總統套房">
+                    <div class="card-content">
+                        <h3>總統套房</h3>
+                        <p>兩臥室宮殿級套房，配備私人泳池與專屬管家。</p>
+                        <ul>
+                            <li>300-400 平方米</li>
+                            <li>兩臥室</li>
+                            <li>私人泳池</li>
+                            <li>專屬管家</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room16.webp" alt="皇家套房">
+                    <div class="card-content">
+                        <h3>皇家套房</h3>
+                        <p>一臥室尊榮套房，享有壯觀全景與私人泳池。</p>
+                        <ul>
+                            <li>400+ 平方米</li>
+                            <li>一臥室</li>
+                            <li>私人泳池</li>
+                            <li>全景露台</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room17.webp" alt="兩臥室濱海家庭房">
+                    <div class="card-content">
+                        <h3>兩臥室濱海家庭房</h3>
+                        <p>兩間濱海客房連通，適合全家舒適入住。</p>
+                        <ul>
+                            <li>90-110 平方米</li>
+                            <li>兩臥室</li>
+                            <li>家庭專屬設施</li>
+                            <li>濱海景觀</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room18.webp" alt="兩臥室海景家庭房">
+                    <div class="card-content">
+                        <h3>兩臥室海景家庭房</h3>
+                        <p>兩間海景客房連通，享受壯觀海景與寬敞空間。</p>
+                        <ul>
+                            <li>90-110 平方米</li>
+                            <li>兩臥室</li>
+                            <li>家庭專屬設施</li>
+                            <li>海景</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room19.webp" alt="兩臥室濱海家庭套房">
+                    <div class="card-content">
+                        <h3>兩臥室濱海家庭套房</h3>
+                        <p>濱海豪華套房與客房連通，適合家庭或團體。</p>
+                        <ul>
+                            <li>120-150 平方米</li>
+                            <li>兩臥室</li>
+                            <li>家庭專屬設施</li>
+                            <li>濱海景觀</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room20.webp" alt="兩臥室海景家庭套房">
+                    <div class="card-content">
+                        <h3>兩臥室海景家庭套房</h3>
+                        <p>兩臥室套房，享有壯觀海景與寬敞露台。</p>
+                        <ul>
+                            <li>120-150 平方米</li>
+                            <li>兩臥室</li>
+                            <li>海景</li>
+                            <li>寬敞露台</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+
+                <div class="accommodation-card">
+                    <img src="room/room21.webp" alt="五臥室皇家套房">
+                    <div class="card-content">
+                        <h3>五臥室皇家套房</h3>
+                        <p>尊榮五臥室套房，配備私人泳池、酒吧與遊戲區。</p>
+                        <ul>
+                            <li>500+ 平方米</li>
+                            <li>五臥室</li>
+                            <li>私人泳池</li>
+                            <li>專屬娛樂空間</li>
+                        </ul>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 為所有預訂按鈕添加點擊事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookButtons = document.querySelectorAll('.book-btn');
+            bookButtons.forEach((button, index) => {
+                // 根據按鈕在頁面中的位置，分配對應的房型ID
+                const roomIds = [
+                    'room1', 'room2', 'room3', 'room4', 'room5', 'room6', 'room7', 'room8', 'room9', 'room10',
+                    'room11', 'room12', 'room13', 'room14', 'room15', 'room16', 'room17', 'room18', 'room19', 'room20', 'room21'
+                ];
+                
+                if (index < roomIds.length) {
+                    button.addEventListener('click', function() {
+                        window.location.href = `order.html?room=${roomIds[index]}`;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
