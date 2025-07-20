@@ -1,0 +1,7 @@
+✅ 資料庫連線成功
+檢查 bookings 表結構...
+更新 status 欄位...
+✅ 資料表初始化完成
+🚀 伺服器已啟動在 http://localhost:3000
+📊 健康檢查: http://localhost:3000/health
+🔗 API 端點: http://localhost:3000/api

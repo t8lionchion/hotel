@@ -1,0 +1,1433 @@
+/* 頁面通用樣式 */
+body {
+    overflow-y: auto !important; /* 確保所有頁面都可以滾動 */
+}
+
+.site-wrapper {
+    min-height: 100vh;
+    overflow-y: auto !important;
+}
+
+/* 覆蓋首頁的 main-content 樣式，確保其他頁面正常顯示 */
+.bookings-page.main-content,
+.accommodation-page.main-content,
+.dining-page.main-content,
+.offers-page.main-content,
+.about-page.main-content,
+.login-page.main-content {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 50px;
+    color: white;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 住宿頁面樣式 */
+.accommodation-page {
+    padding: 40px 40px 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.accommodation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.accommodation-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.accommodation-card:hover {
+    transform: translateY(-5px);
+}
+
+.accommodation-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.accommodation-card .card-content {
+    padding: 25px;
+    color: white;
+}
+
+.accommodation-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #f9c74f;
+}
+
+.accommodation-card p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.accommodation-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.accommodation-card li {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accommodation-card li:last-child {
+    border-bottom: none;
+}
+
+.book-btn {
+    background: #f9c74f;
+    color: #111;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.book-btn:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+/* 餐飲頁面樣式 */
+.dining-page {
+    padding: 40px 40px 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dining-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.dining-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.dining-card:hover {
+    transform: translateY(-5px);
+}
+
+.dining-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.dining-card .card-content {
+    padding: 25px;
+    color: white;
+}
+
+.dining-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #f9c74f;
+}
+
+.dining-card p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.restaurant-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.restaurant-info span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.restaurant-info i {
+    color: #f9c74f;
+    width: 16px;
+}
+
+.reserve-btn {
+    background: #f9c74f;
+    color: #111;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.reserve-btn:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+/* 優惠頁面樣式 */
+.offers-page {
+    padding: 40px 40px 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.offer-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+    position: relative;
+    min-width: 0;
+    width: 100%;
+}
+
+.offer-card.featured {
+    border: 2px solid #f9c74f;
+}
+
+.offer-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f9c74f;
+    color: #111;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+}
+
+.offer-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.offer-card .card-content {
+    padding: 25px;
+    color: white;
+}
+
+.offer-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #f9c74f;
+}
+
+.offer-description {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.offer-details ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.offer-details li {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.offer-details li:last-child {
+    border-bottom: none;
+}
+
+.price-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.discount-price {
+    color: #f9c74f;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* 關於我們頁面樣式 */
+.about-page {
+    padding: 40px 40px 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.about-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.about-section:hover {
+    transform: translateY(-5px);
+}
+
+.about-section.reverse {
+    direction: rtl;
+}
+
+.about-section.reverse .section-content {
+    direction: ltr;
+}
+
+.about-section img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.section-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #f9c74f;
+}
+
+.section-content p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: white;
+}
+
+.location-features {
+    list-style: none;
+    padding: 0;
+}
+
+.location-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.location-features i {
+    color: #f9c74f;
+    width: 20px;
+}
+
+.facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.facility-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+}
+
+.facility-item i {
+    color: #f9c74f;
+    font-size: 1.2rem;
+}
+
+.sustainability-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.feature {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white;
+}
+
+.feature i {
+    font-size: 2rem;
+    color: #f9c74f;
+    margin-bottom: 10px;
+}
+
+.feature h4 {
+    margin-bottom: 8px;
+    color: #f9c74f;
+}
+
+.sustainability-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.sustainability-cards .facility-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.sustainability-cards .facility-item i {
+    color: #f9c74f;
+    font-size: 1.2rem;
+}
+
+.sustainability-cards .facility-title {
+    font-weight: bold;
+    color: #f9c74f;
+    margin-bottom: 2px;
+}
+
+.sustainability-cards .facility-desc {
+    font-size: 0.95rem;
+    color: white;
+}
+
+/* 預訂頁面樣式 */
+.bookings-page {
+    padding: 40px 40px 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* 統計概覽 */
+.booking-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #f9c74f, #f8961e);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.stat-content h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #f9c74f;
+    margin: 0 0 5px 0;
+}
+
+.stat-content p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* 主要內容區域 */
+.bookings-main {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+    align-items: start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 預訂列表 */
+.bookings-list {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.list-header h2 {
+    color: #f9c74f;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: #f9c74f;
+    color: #111;
+    border-color: #f9c74f;
+}
+
+/* 預訂卡片 */
+.booking-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(249, 199, 79, 0.3);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.booking-info h3 {
+    color: #f9c74f;
+    font-size: 1.3rem;
+    margin: 0 0 5px 0;
+}
+
+.booking-number {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    font-family: monospace;
+}
+
+.booking-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.booking-status.confirmed {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.booking-status.completed {
+    background: rgba(33, 150, 243, 0.2);
+    color: #2196F3;
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.card-body {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: start;
+}
+
+.booking-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.detail-item i {
+    color: #f9c74f;
+    width: 16px;
+    text-align: center;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-content .label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.detail-content .value {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.booking-price {
+    text-align: right;
+    padding: 15px;
+    background: rgba(249, 199, 79, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(249, 199, 79, 0.2);
+}
+
+.price-label {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+.price-amount {
+    display: block;
+    color: #f9c74f;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.action-btn.primary {
+    background: #f9c74f;
+    color: #111;
+}
+
+.action-btn.primary:hover {
+    background: white;
+    transform: translateY(-1px);
+}
+
+.action-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.action-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.action-btn.danger {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.action-btn.danger:hover {
+    background: rgba(244, 67, 54, 0.3);
+}
+
+.action-btn.info {
+    background: rgba(33, 150, 243, 0.2);
+    color: #2196F3;
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.action-btn.info:hover {
+    background: rgba(33, 150, 243, 0.3);
+}
+
+/* 側邊欄 */
+.bookings-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.quick-actions,
+.member-info {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.quick-actions h3,
+.member-info h3 {
+    color: #f9c74f;
+    font-size: 1.3rem;
+    margin: 0 0 20px 0;
+}
+
+.action-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.quick-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.quick-action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(249, 199, 79, 0.3);
+    transform: translateX(5px);
+}
+
+.action-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #f9c74f, #f8961e);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.action-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.action-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.action-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+/* 會員資訊 */
+.member-stats {
+    margin-bottom: 25px;
+}
+
+.member-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.member-stat:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.stat-value.gold {
+    color: #f9c74f;
+}
+
+.member-benefits h4 {
+    color: #f9c74f;
+    font-size: 1.1rem;
+    margin: 0 0 15px 0;
+}
+
+.member-benefits ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.member-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.member-benefits i {
+    color: #4CAF50;
+    font-size: 0.8rem;
+}
+
+/* 登入頁面樣式 */
+.login-page {
+    padding: 40px 40px 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 50px;
+    max-width: 600px;
+    width: 100%;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    margin: 0 auto 0; /* 減少上方margin，讓登入框往上移動 */
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.login-header h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #f9c74f;
+}
+
+.login-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.login-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+    user-select: none;
+}
+
+.tab-btn.active {
+    background: #f9c74f;
+    color: #111;
+}
+
+.tab-btn:hover:not(.active) {
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.login-form,
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #f9c74f;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #f9c74f;
+}
+
+.forgot-password {
+    color: #f9c74f;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: white;
+}
+
+.login-btn,
+.register-btn {
+    background: #f9c74f;
+    color: #111;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.login-btn:hover,
+.register-btn:hover {
+    background: white;
+    transform: translateY(-2px);
+}
+
+.social-login {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-login p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.social-btn.google:hover {
+    border-color: #4285f4;
+    color: #4285f4;
+}
+
+.social-btn.facebook:hover {
+    border-color: #1877f2;
+    color: #1877f2;
+}
+
+.login-benefits {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-benefits h3 {
+    color: #f9c74f;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.login-benefits ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    justify-items: center;
+}
+
+.login-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.login-benefits i {
+    color: #4CAF50;
+    font-size: 0.8rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .accommodation-page,
+    .dining-page,
+    .offers-page,
+    .about-page,
+    .bookings-page,
+    .login-page {
+        padding: 40px 16px 40px 16px;
+        max-width: 90vw;
+        width: 90vw;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    .page-header {
+        margin-bottom: 30px;
+    }
+    
+    .accommodation-grid,
+    .dining-grid,
+    .offers-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .offers-grid {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .about-section,
+    .about-section.reverse {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .about-section,
+    .about-section.reverse {
+        padding: 20px;
+    }
+    
+    .facilities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sustainability-features {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 預訂頁面手機版優化 */
+    .booking-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .stat-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .bookings-main {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .list-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .filter-tabs {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .filter-btn {
+        flex: 1;
+        text-align: center;
+        padding: 10px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .card-body {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .booking-details {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .booking-price {
+        text-align: center;
+        padding: 12px;
+    }
+    
+    .price-amount {
+        font-size: 1.3rem;
+    }
+    
+    .card-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+    
+    .bookings-sidebar {
+        gap: 20px;
+    }
+    
+    .quick-actions,
+    .member-info {
+        padding: 20px;
+    }
+    
+    .quick-action-btn {
+        padding: 12px;
+    }
+    
+    .action-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .action-title {
+        font-size: 0.9rem;
+    }
+    
+    .action-desc {
+        font-size: 0.75rem;
+    }
+    
+    .member-stat {
+        padding: 8px 0;
+    }
+    
+    .member-benefits li {
+        font-size: 0.85rem;
+        padding: 6px 0;
+    }
+    
+    /* 登入頁面手機版優化 */
+    .login-page {
+        padding-top: 24px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .login-container {
+        width: 90vw;
+        max-width: 90vw;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .login-header h1 {
+        font-size: 2rem;
+    }
+    
+    /* 手機版標籤頁優化 */
+    .login-tabs {
+        margin-bottom: 20px;
+        padding: 3px;
+    }
+    
+    .tab-btn {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .social-buttons {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .login-benefits ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+.info-panel .title {
+    font-size: 2.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .info-panel .title {
+        font-size: 1.5rem;
+    }
+} 

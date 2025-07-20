@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>backEnd</title>
+  <link rel="stylesheet" href="css/styles_BK.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+<main>
+    <div class="container-fluid ">
+        <div class="row ">
+          <!--左邊菜單  -->
+          <div class="col-2 p-0 ">
+            <div class="container text-center p-0">
+              <div class="row vh-100  flex-column  justify-content-center m-0 ">
+                <div class="col-4 p-3 p-0 h-0 d-flex">
+                      <a class="navbar-brand m-0 p-0 main-logo  ms-5" href="/backEnd.html">管理後臺</a>
+                </div>
+                <div class="col-8 m-0 p-3 h-75">
+                  <nav class="navbar navbar-expand-lg  justify-content-start my-5 ms-5">
+                    <ul class="navbar-nav flex-column align-items-start justify-content-start gap-5 my-5">
+                      <li class="nav-item"><a href="/backEnd_room.html" class="my-2 py-3 description text-decoration-none">房間管理</a></li> 
+                      <li class="nav-item"><a href="/backEnd_order.html" class="my-2 py-3 description text-decoration-none">訂單管理</a></li> 
+                      <li class="nav-item"><a href="/backEnd_custmer.html" class="my-2 py-3 description text-decoration-none">顧客管理</a></li> 
+                      <li class="nav-item"><a href="/backEnd_report.html" class="my-2 py-3 description text-decoration-none">營業報表</a></li> 
+                    </ul>
+                  </nav> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 右邊版面 -->
+          <div class="col-10 ps-5">
+            <div class="container-fluid d-flex justify-content-between my-3 p-0 border-bottom-ST">
+                <div class="col-6 m-0 p-0 d-flex align-items-center">
+                  <h1 class=" m-0 p-0 main-logo">Dashboard 管理後台</h1>
+                </div>
+                <div class="col-6 m-0 p-0 ">
+                  <div class="d-flex align-items-center justify-content-end  me-3">                  
+                    <span class="m-0 text-light">將在</span>
+                    <span class="m-0 text-light" id="autoLogout">15:00</span>
+                    <span class="m-0 text-light mx-2">後自動登出</span>
+                    <button class="btn btn-outline-light mx-2" onclick="logout()">登出</button>
+                  </div>
+                </div>
+             </div>
+             <div class="container my-5">
+              <div class="row">
+                <div class="col-12 mb-5">
+                  <div class="card shadow-sm">
+                    <div class="card-body">
+                      <div class="container-fluid d-flex justify-content-between border-bottom fw-bold align-items-center">
+                        <h5 class="card-title m-0 text-center fw-bold">房間狀態</h5>
+                        <button class="col-1 py-2 my-2  btn btn-outline-success btn-sm  float-end " data-bs-toggle="modal" data-bs-target="#staticBackdrop">新增房型</button>
+                      </div>
+                      <div class="table-responsive">
+                        <div class="container-fluid mt-2">
+                        <table class="table table-hover table-striped table-bordered align-middle text-center">
+                          <thead class="table-light">
+                            <tr class="align-middle">
+                              <th class="text-nowrap">房間號碼</th>
+                              <th class="text-nowrap">房間類型</th>
+                              <th class="text-nowrap">人數</th>
+                              <th class="text-nowrap">價格</th>
+                              <th class="text-nowrap">圖片</th>
+                              <th class="text-nowrap">備註</th>
+                              <!-- <th class="text-nowrap">狀態</th> -->
+                              <th class="text-nowrap">建立日期</th>
+                              <th class="text-nowrap">編輯</th>
+                              <th class="text-nowrap">刪除</th>
+                            </tr>
+                          </thead>
+                          <tbody id="room_data">
+                            
+                            <!-- 可加更多房間列 -->
+                          </tbody>
+                        </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+<!-- 查看:訂購人姓名 電話 預定時間 人數 備註 VIP -->
+
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  新增房型
+</button> -->
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRoomModalLabel">新增房型</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="roomType" class="form-label">房間類型</label>
+          <input type="text" class="form-control" id="roomType" name="roomType" required/>
+        </div>
+        <div class="mb-3">
+          <label for="capacity" class="form-label">人數</label>
+          <input type="number" class="form-control" id="capacity" name="capacity" required/>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">價格</label>
+          <input type="number" class="form-control" id="price" name="price" required/>
+        </div>
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">圖片網址</label>
+          <input type="text" class="form-control" id="imageUrl" name="imageUrl"/>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">備註</label>
+          <textarea class="form-control" id="description" name="description"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary" onclick="addRoom()">確認新增</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 編輯房型 Modal -->
+<div class="modal fade" id="editRoomModal" tabindex="-1" aria-labelledby="editRoomModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="editRoomForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editRoomModalLabel">編輯房型</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+        </div>
+        <div class="modal-body">
+          <!-- 隱藏欄位：房型 ID -->
+          <input type="hidden" id="editRoomId" name="id"/>
+          
+          <div class="mb-3">
+            <label for="editRoomType" class="form-label">房間類型</label>
+            <input type="text" class="form-control" id="editRoomType" name="roomType" required/>
+          </div>
+          <div class="mb-3">
+            <label for="editCapacity" class="form-label">人數</label>
+            <input type="number" class="form-control" id="editCapacity" name="capacity" required/>
+          </div>
+          <div class="mb-3">
+            <label for="editPrice" class="form-label">價格</label>
+            <input type="number" class="form-control" id="editPrice" name="price" required/>
+          </div>
+          <div class="mb-3">
+            <label for="editImageUrl" class="form-label">圖片網址</label>
+            <input type="text" class="form-control" id="editImageUrl" name="imageUrl"/>
+          </div>
+          <div class="mb-3">
+            <label for="editDescription" class="form-label">備註</label>
+            <textarea class="form-control" id="editDescription" name="description"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="submit" class="btn btn-primary updateRoom">確認更新</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+</main>
+
+<script>
+  
+let room_data = document.getElementById('room_data')
+async function room_data_F() {
+  const response = await fetch('/api/backend_room')
+  const data = await response.json()
+  console.log(data)
+
+//日期格式化---
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}/${month}/${day}`;
+}
+
+  //內容生成----
+  room_data.innerHTML = '';
+  data.forEach(element => {
+    room_data.innerHTML += `
+    <tr>
+    <td>${element.id}</td>
+    <td>${element.name}</td>
+    <td>${element.capacity}</td>
+    <td>${element.price}</td>
+    <td><img src="${element.image_url}" alt="房間圖片" width="80" class="rounded"></td>
+    <td>${element.description}</td>
+    <td>${formatDate(element.created_at)}</td>
+    <td><button class="btn btn-outline-success btn-sm me-1 edit-btn " data-id="${element.id}" data-bs-toggle="modal" data-bs-target="#editRoomModal">編輯</button></td>
+    <td><button class="btn btn-outline-danger btn-sm delete-btn" data-id="${element.id}" >刪除</button></td>
+  </tr>`    
+  });
+}
+room_data_F();
+
+//增加房型
+const room = document.getElementById('roomType')
+const cap = document.getElementById('capacity')
+const pri = document.getElementById('price')
+const Url = document.getElementById('imageUrl')
+const des = document.getElementById('description')
+async function addRoom(){
+
+const roomType = room.value;
+const capacity = cap.value;
+const price = pri.value;
+const imageUrl = Url.value;
+const description = des.value;
+
+
+  const response = await fetch('/api/backend_room/add', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          "name": roomType,
+          "capacity": capacity,
+          "price": price,
+          "image_url": imageUrl,
+          "description": description
+      })
+  })
+  const data = await response.json()
+  console.log(data)
+  room_data_F();
+}
+
+//刪除房型
+document.getElementById('room_data').addEventListener('click', async (e) => {
+  if (e.target.classList.contains('delete-btn')) {
+    const id = e.target.getAttribute('data-id');
+    if (confirm('確定要刪除這個房型嗎？')) {
+      await deleteRoom(id);
+    }
+  }
+});
+
+async function deleteRoom(id){
+  const response = await fetch('/api/backend_room/delete/' + id, {
+    method: 'DELETE'
+  });
+  const data = await response.json();
+  console.log(data);
+  room_data_F(); // 重新載入房型列表
+}
+
+// 抓取 input 元素
+const editRoomType = document.getElementById('editRoomType');
+const editCapacity = document.getElementById('editCapacity');
+const editPrice = document.getElementById('editPrice');
+const editImageUrl = document.getElementById('editImageUrl');
+const editDescription = document.getElementById('editDescription');
+
+// 點「編輯」按鈕，抓取資料並填入 modal
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('edit-btn')) {
+    const id = e.target.getAttribute('data-id');
+    const response = await fetch('/api/backend_room/edit/' + id);
+    const data = await response.json();
+
+    // 填入 modal 表單資料
+    editRoomType.value = data.name;
+    editCapacity.value = data.capacity;
+    editPrice.value = data.price;
+    editImageUrl.value = data.image_url;
+    editDescription.value = data.description;
+
+    // 設定 data-id 給「送出修改」按鈕（方便知道是哪個 id）
+    document.querySelector('.updateRoom').setAttribute('data-id', id);
+
+    // 顯示 modal
+    // const modal = new bootstrap.Modal(document.getElementById('editModal'));
+    // modal.show();
+  }
+});
+
+// 點「送出修改」按鈕
+document.querySelector('.updateRoom').addEventListener('click', async (e) => {
+  const id = e.target.getAttribute('data-id');
+  await updateRoom(id);
+});
+
+async function updateRoom(id) {
+  const response = await fetch('/api/backend_room/update/' + id, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: editRoomType.value,
+      capacity: editCapacity.value,
+      price: editPrice.value,
+      image_url: editImageUrl.value,
+      description: editDescription.value
+    })
+  });
+
+  const data = await response.json();
+  console.log(data);
+
+  // 關閉 modal
+  // const modalEl = document.getElementById('editModal');
+  // const modalInstance = bootstrap.Modal.getInstance(modalEl);
+  // modalInstance.hide();
+
+  // 重新載入房型資料
+  room_data_F();
+}
+
+
+</script>
+<script src="bk_script.js"></script>
+
+
+</body>
+</html>

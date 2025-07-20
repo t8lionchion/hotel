@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>backEnd</title>
+  <link rel="stylesheet" href="css/styles_BK.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  
+
+</head>
+<body>
+<main>
+    <div class="container-fluid ">
+        <div class="row ">
+          <!--左邊菜單  -->
+          <div class="col-2 p-0 ">
+            <div class="container text-center p-0">
+              <div class="row vh-100  flex-column  justify-content-center m-0 ">
+                <div class="col-4 p-3 p-0 h-0 d-flex">
+                  <a class="navbar-brand m-0 p-0 main-logo  ms-5" href="/backEnd.html">管理後臺</a>
+                </div>
+                <div class="col-8 m-0 p-3 h-75">
+                  <nav class="navbar navbar-expand-lg  justify-content-start my-5 ms-5">
+                    <ul class="navbar-nav flex-column align-items-start justify-content-start gap-5 my-5">
+                      <li class="nav-item  "><a href="/backEnd_room.html" class="my-2 py-3 description text-decoration-none">房間管理</a></li> 
+                      <li class="nav-item  "><a href="/backEnd_order.html" class="my-2 py-3 description text-decoration-none">訂單管理</a></li> 
+                     
+                      <li class="nav-item  "><a href="/backEnd_custmer.html" class="my-2 py-3 description text-decoration-none">顧客管理</a></li> 
+                      <li class="nav-item  "><a href="/backEnd_report.html" class="my-2 py-3 description text-decoration-none">營業報表</a></li> 
+                      
+                    </ul>
+                  </nav> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 右邊版面 -->
+          <div class="col-10 ps-5">
+            <div class="container-fluid d-flex justify-content-between my-3 p-0 border-bottom-ST">
+                <div class="col-6 m-0 p-0 d-flex align-items-center">
+                  <h1 class=" m-0 p-0 main-logo">Dashboard 管理後台</h1>
+                </div>
+                <div class="col-6 m-0 p-0 ">
+                  <div class="d-flex align-items-center justify-content-end  me-3">                  
+                    <span class="m-0 text-light">將在</span>
+                    <span class="m-0 text-light" id="autoLogout">15:00</span>
+                    <span class="m-0 text-light mx-2">後自動登出</span>
+                    <button class="btn btn-outline-light mx-2" onclick="logout()">登出</button>
+                  </div>
+                </div>
+             </div>
+
+             <div class="container my-5">
+              <div class="row">
+                <div class="col-12 mb-5">
+                  <div class="card shadow-sm">
+                    <div class="card-body">
+                      <div class="container-fluid d-flex justify-content-between border-bottom fw-bold align-items-center">
+                        <h5 class="card-title m-0 text-center fw-bold">訂單狀態</h5>
+                        <button class="col-1 py-2 my-2  btn btn-outline-success btn-sm  float-end">新增訂房</button>
+                      </div>
+                      <div class="table-responsive">
+                        <div class="container-fluid mt-2">
+                          <div class="row d-flex justify-content-center my-2">
+                              <div class="col-2">
+                                <div class="dropdown d-flex justify-content-center  ">
+                                  <button class="btn  btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    查詢選項
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">訂位姓名</a></li>
+                                    <li><a class="dropdown-item" href="#">聯絡電話</a></li>
+                                    <li><a class="dropdown-item" href="#">日期</a></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="col-9">
+                                <input type="text" class="form-control" placeholder="輸入查詢">
+                              </div>
+                              <div class="col-1  d-grid">
+                                <button class="btn btn-outline-primary btn-sm ">查詢</button>
+                              </div>
+                           </div>
+
+
+                          </div>
+                        </div>
+
+                        <table class="table table-hover table-striped table-bordered align-middle text-center">
+                          <thead class="table-light">
+                            <tr class="align-middle">
+                              <th class="text-nowrap">訂單號碼</th>
+                              <th class="text-nowrap">是否住宿</th>
+                              <th class="text-nowrap">訂位姓名</th>
+                              <th class="text-nowrap">聯絡電話</th>
+                              <th class="text-nowrap">人數</th>
+                              <th class="text-nowrap">預留桌號</th>
+                              <th class="text-nowrap">訂位日期</th>
+                              <th class="text-nowrap">特殊需求</th>
+                              <th class="text-nowrap">總金額</th>
+                              <th class="text-nowrap">VIP</th>
+                              <th class="text-nowrap">編輯</th>
+                              <th class="text-nowrap">刪除</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- 範例資料 -->
+                             <tr>
+                              <td>1</td>
+                              <td>是</td>
+                              <td>ASD</td>
+                              <td>123456789</td>
+                              <td>2</td>
+                              <td>T1</td>
+                              <td>7/12</td>
+                              <td>999</td>
+                              <td>無</td>
+                              <td>是</td>
+                              <td>
+                                <button class="btn btn-outline-success btn-sm me-1">編輯</button>
+                              </td>
+                              <td>
+                                <button class="btn btn-outline-danger btn-sm">刪除</button>
+                              </td>
+                            </tr>
+                            
+                            <!-- 可複製更多列 -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            </div>
+
+             
+          </div>
+        </div>
+    </div>
+
+
+       <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  新增房型
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">新增房型</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">編輯</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</main>
+</body>
+</html>
