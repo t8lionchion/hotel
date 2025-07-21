@@ -10,7 +10,12 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <style>
+    #myChart_4 {
+  max-width: 100%;
+  height: 400px;
+}
+  </style>
 </head>
 <body>
 <main>
@@ -59,23 +64,6 @@
                   <h5 class="py-2 my-2 text-center main-logo">營業報表</h5>
                 </div>
 
-                <!-- <div class="col-3 offset-2">
-                  <div class="card">
-                    <div class="card-header"> 房間使用率 圓餅圖</div>
-                    <div class="card-body">
-                      <canvas id="myChart_2" width="400" height="200"></canvas>
-                    </div>                   
-                  </div>
-                </div>
-                <div class="col-3 offset-2">
-                  <div class="card">
-                    <div class="card-header">熱門房間 圓餅圖</div>
-                    <div class="card-body">
-                      <canvas id="myChart_3" width="400" height="200"></canvas>
-                    </div>                   
-                  </div>
-                </div> -->
-
               </div>
              </div>
 
@@ -85,9 +73,9 @@
                   <p class="py-2 my-2 text-center main-logo">營收查詢</p>
                   <div class="d-flex justify-content-center align-items-center gap-3">
                     <p class="m-0 text-light fs-5">請選擇查詢日期</p>
-                    <input type="date" id="checkDate-start">
-                    <input type="date" id="checkDate-end">
-                    <button class="btn btn-light">查詢</button>
+                    <input type="date" id="startDate">
+                    <input type="date" id="endDate">
+                    <button id="searchBtn" class="btn btn-light">查詢</button>
                   </div>
                   
                 </div>
@@ -110,92 +98,124 @@
 </main>
 
 <script>
-// const ctx1 = document.getElementById('myChart_1');
-// new Chart(ctx1, {
-//   type: 'doughnut',
-//   data: {
-//     labels: ['Red', 'Blue',],
-//     datasets: [{
-//       label: '# of Votes',
-//       data: [12, 19],
-//     }]
-//   },
-// });
+let chartInstance = null;
 
-// const ctx2 = document.getElementById('myChart_2');
-// new Chart(ctx2, {
-//   type: 'doughnut',
-//   data: {
-//     labels: ['Red', 'Blue',],
-//     datasets: [{
-//       label: '# of Votes',
-//       data: [12, 19],
-//     }]
-//   },
-// });
+// 補日期與銷售額（有缺補0）
+function fillMissingDatesWithSales(startDate, endDate, salesDataMap) {
+  const resultLabels = [];
+  const resultData = [];
 
-//營收長條圖
-async function getsalesData() {
-    const response = await fetch('/api/backend_report');
-    const data = await response.json();
-    const labels = data.map(item => item.check_in); // 假設資料中有 month 欄位
-    const salesData = data.map(item => item.total_price);
-    const payment_status = data.map(item => item.payment_status);
+  let current = new Date(startDate);
+  const end = new Date(endDate);
 
-    // return { labels, salesData, payment_status };
-    console.log("---------");
-    console.log(data);
-    console.log("---------");
+  while (current <= end) {
+    const year = current.getFullYear();
+    const month = String(current.getMonth() + 1).padStart(2, '0');
+    const day = String(current.getDate()).padStart(2, '0');
+    const formatted = `${year}/${month}/${day}`;
+
+    resultLabels.push(formatted);
+    resultData.push(salesDataMap[formatted] || 0);
+
+    current.setDate(current.getDate() + 1);
+  }
+
+  return { resultLabels, resultData };
 }
 
-getsalesData();
+async function getsalesData(startDate, endDate) {
+  let url = '/api/backend_report';
+  if (startDate && endDate) {
+    url += `?start=${startDate}&end=${endDate}`;
+  }
 
+  const response = await fetch(url);
+  const data = await response.json();
 
+  if (data.length === 0) {
+    updateChart([], []);
+    return;
+  }
 
-const ctx4 = document.getElementById('myChart_4');
+  // 建立 {日期: 銷售額} 對照表，日期格式為 yyyy/mm/dd
+  const salesDataMap = {};
+  data.forEach(item => {
+    const d = new Date(item.check_in);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const formatted = `${year}/${month}/${day}`;
+    salesDataMap[formatted] = item.total_price;
+  });
 
-new Chart(ctx4, {
+  // 如果沒傳參數，預設用資料中日期範圍
+  if (!startDate || !endDate) {
+    startDate = data[0].check_in;
+    endDate = data[data.length - 1].check_in;
+  }
+
+  // 補全日期與銷售額
+  const { resultLabels, resultData } = fillMissingDatesWithSales(startDate, endDate, salesDataMap);
+
+  updateChart(resultLabels, resultData);
+}
+
+function updateChart(labels, data) {
+  const ctx = document.getElementById('myChart_4').getContext('2d');
+  if (chartInstance) {
+    chartInstance.destroy();
+  }
+  chartInstance = new Chart(ctx, {
     type: 'bar',
     data: {
-                labels: ['一月', '二月', '三月', '四月', '五月'], // X 軸標籤
-                datasets: [{
-                    label: '銷售額', // 資料集的名稱
-                    data: [1200, 1900, 3000, 5000, 2300], // 實際資料
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.6)' // 藍色
-                    ],
-                    borderColor: [
-                        'rgba(54, 162, 235, 1)'
-                    ]
-                }]
-            },
+      labels,
+      datasets: [{
+        label: '銷售額',
+        data,
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
     options: {
-        scales: {
-            x: {
-                stacked: true
-            },
-            y: {
-                stacked: true
-            }
-        }
-    }
-});
- 
-
-
-  // 選取日期--------------------------------------
- const checkInInput = document.getElementById("checkDate-start");
-  const checkOutInput = document.getElementById("checkDate-end");
-
-  checkInInput.addEventListener("change", function () {
-    const checkInValue = this.value; // 取得入住日字串 "YYYY-MM-DD"
-    if (checkInValue) {
-      const checkInDate = new Date(checkInValue);
-      checkInDate.setDate(checkInDate.getDate() + 1); // 加一天
-      const minCheckOut = checkInDate.toISOString().split('T')[0];
-      checkOutInput.min = minCheckOut;
+      scales: {
+        x: { stacked: false },
+        y: { stacked: false }
+      }
     }
   });
+}
+
+// 綁定查詢按鈕
+document.getElementById('searchBtn').addEventListener('click', () => {
+  const startDate = document.getElementById('startDate').value;
+  const endDate = document.getElementById('endDate').value;
+
+  if (!startDate || !endDate) {
+    alert('請選擇完整的起訖日期');
+    return;
+  }
+
+  getsalesData(startDate, endDate);
+});
+
+// 初始載入預設近7天資料
+window.onload = () => {
+  const today = new Date();
+  const end = today.toISOString().slice(0, 10); // yyyy-mm-dd
+  const startDateObj = new Date(today);
+  startDateObj.setDate(today.getDate() - 6);
+  const start = startDateObj.toISOString().slice(0, 10);
+
+  // 預設輸入欄位也顯示這區間
+  document.getElementById('startDate').value = start;
+  document.getElementById('endDate').value = end;
+
+  getsalesData(start, end);
+};
+
+
+
 
 </script>
 <script src="bk_script.js"></script>
