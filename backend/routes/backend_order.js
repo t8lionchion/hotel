@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async(req, res) => {
     try {
         const connection = await pool.getConnection();
-        const [bookings] = await connection.execute('SELECT b.id, b.room_type_id,b.user_id,  b.check_in, b.check_out,b.total_price, b.special_requests , b.payment_status ,u.name as customer_name , u.phone as customer_phone ,g.adults , g.children , rt.name as room_type_name  from bookings as b left join guests as g on b.id = g.booking_id left join room_types as rt on b.room_type_id = rt.id left join users as u on b.user_id = u.id where b.check_in >= CURDATE() order by b.id');
+        const [bookings] = await connection.execute('SELECT b.id, b.room_type_id,b.user_id,  b.check_in, b.check_out,b.total_price, b.special_requests , b.payment_status ,u.name as customer_name , u.phone as customer_phone ,g.adults , g.children , rt.name as room_type_name  from bookings as b left join guests as g on b.id = g.booking_id left join room_types as rt on b.room_type_id = rt.id left join users as u on b.user_id = u.id where b.check_out >= CURDATE() order by b.id');
         connection.release();
         res.json(bookings);
     }catch(error){
