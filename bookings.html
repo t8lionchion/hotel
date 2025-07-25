@@ -871,7 +871,7 @@
                 }
                 
                 // 建立綠界付款訂單
-                const paymentResponse = await fetch('http://localhost:3000/api/payment/create-order', {
+                const paymentResponse = await fetch('/api/payment/create-order', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

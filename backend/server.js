@@ -14,7 +14,7 @@ const backend_room = require('./routes/backend_room');
 const backend_custmer = require('./routes/backend_custmer');
 const backend_report = require('./routes/backend_report');
 const app = express();
-
+const paymentRoutes = require('./routes/payment');   
 // 中間件
 app.use(cors());
 app.use(express.json());
@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // 靜態檔案服務
 app.use(express.static('../'));
+app.use('/api/payment', paymentRoutes);
 
 // API 路由
 app.use('/api/bookings', bookingsRouter);
