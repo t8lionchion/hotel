@@ -1,57 +1,112 @@
+// ✅ 最上方先引入模組
 const express = require('express');
 const router = express.Router();
 const ecpay_payment = require('ecpay-payment');
-const { pool } = require('../database'); // 假設你的資料庫連線在這
+const pool = require('../database'); // ✅ 一定要放在最上方，才能在 callback 使用
 
-// 綠界設定（請替換成自己的商店資料）
+// ✅ 測試金鑰（請勿上線使用）
 const options = {
-    MerchantID: '你的MerchantID',
-    HashKey: '你的HashKey',
-    HashIV: '你的HashIV',
-    ReturnURL: 'http://hosttest250723.ddns.net/api/payment/ecpay-callback', // 綠界回傳網址
-    ClientBackURL: 'http://hosttest250723.ddns.net/thankyou.html', // 付款完成後返回網址
-    // 注意：本地測試請用 ngrok 等工具讓綠界能回傳
+  MerchantID: '2000132',
+  HashKey: '5294y06JbISpM5x9',
+  HashIV: 'v77hoKGq4kWxNNIS',
+  ReturnURL: 'http://localhost:3000/api/payment/callback',
+  ClientBackURL: 'http://localhost:3000/bookings.html'
 };
 
-// 建立訂單API
-router.post('/create-order', async (req, res) => {
-    try {
-        const { bookingId, amount, description } = req.body;
+// ✅ 建立綠界付款訂單（aio）
+router.post('/', (req, res) => {
+  try {
+    const { bookingId, amount, description } = req.body;
 
-        // 可依需求查詢 booking 資料確認資訊
-        // const [rows] = await pool.execute('SELECT * FROM bookings WHERE id = ?', [bookingId]);
-        // if (!rows.length) return res.json({ success: false, message: '無此訂單' });
+    const now = new Date();
+    const MerchantTradeDate = `${now.getFullYear()}/${(now.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')} ${now
+      .getHours()
+      .toString()
+      .padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now
+      .getSeconds()
+      .toString()
+      .padStart(2, '0')}`;
 
-        // 綠界SDK初始化
-        const base_param = {
-            MerchantTradeNo: `HOTEL${Date.now()}`, // 訂單編號需唯一
-            MerchantTradeDate: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-            TotalAmount: parseInt(amount, 10),
-            TradeDesc: description || '旅館訂單',
-            ItemName: '訂房一筆',
-            ReturnURL: options.ReturnURL,
-            ClientBackURL: options.ClientBackURL,
-            ChoosePayment: 'ALL',
-        };
+    const base_param = {
+      MerchantTradeNo: 'ORDER' + Date.now(),
+      MerchantTradeDate,
+      TotalAmount: String(amount),
+      TradeDesc: description || '網站預訂房間',
+      ItemName: '住宿房型 x1',
+      ReturnURL: options.ReturnURL,
+      ClientBackURL: options.ClientBackURL,
+      ChoosePayment: 'ALL',
+      PaymentType: 'aio',
+      EncryptType: 1,
+      CustomField1: bookingId?.toString() || 'noid'
+    };
 
-        // 建立表單
-        try {
-            const create = new ecpay_payment(options);
-            const html = create.payment_client.aio_check_out_all(base_param);
+    const create = new ecpay_payment(options);
+    const html = create.payment_client.aio_check_out_all(base_param, {});
 
-            // 可將訂單編號存入 bookings.payment_number 等資料庫欄位
-            // await pool.execute('UPDATE bookings SET payment_number = ? WHERE id = ?', [base_param.MerchantTradeNo, bookingId]);
+    res.send(html);
+  } catch (err) {
+    console.error('❌ 建立金流失敗：', err);
+    res
+      .status(500)
+      .send(`<h1>建立金流訂單失敗</h1><pre>${err.message}</pre>`);
+  }
+});
 
-            res.json({
-                success: true,
-                htmlForm: html // 前端可用 innerHTML 放入並自動送出
-            });
-        } catch (ecpayErr) {
-            res.json({ success: false, message: `綠界API錯誤: ${ecpayErr.message}` });
-        }
-    } catch (err) {
-        res.json({ success: false, message: `伺服器錯誤: ${err.message}` });
+// ✅ 綠界付款完成後回呼（ReturnURL）
+router.post('/callback', async (req, res) => {
+  try {
+    // ✅ 印出完整內容觀察（很重要）
+    console.log('🔁 綠界 callback req.body：', req.body);
+
+    const {
+      RtnCode,
+      CustomField1, // bookingId
+      PaymentDate,
+      PaymentType,
+      TradeNo,
+      PaymentMethod,
+      MerchantTradeNo
+    } = req.body;
+
+    if (RtnCode === '1' || RtnCode === 1) {
+      const bookingId = CustomField1;
+
+      await pool.execute(
+        `
+        UPDATE bookings SET
+          payment_status = 'confirmed',
+          payment_method = ?,
+          payment_date = ?,
+          payment_number = ?,
+          payment_type = ?,
+          ecpay_merchant_trade_no = ?,
+          ecpay_payment_date = ?
+        WHERE bookingId = ?
+      `,
+        [
+          PaymentMethod || null,
+          PaymentDate || null,
+          TradeNo || null,
+          PaymentType || null,
+          MerchantTradeNo || null,
+          PaymentDate || null,
+          bookingId
+        ]
+      );
+
+      console.log(`✅ 綠界通知成功：訂單 ${bookingId} 已更新付款資訊`);
+      res.send('1|OK');
+    } else {
+      console.warn('❗ 綠界通知失敗：RtnCode ≠ 1，收到的是', RtnCode);
+      res.send('0|FAIL');
     }
+  } catch (err) {
+    console.error('❌ 綠界 callback 錯誤：', err);
+    res.send('0|FAIL');
+  }
 });
 
 module.exports = router;
