@@ -69,7 +69,59 @@ async function initTables() {
       )
     `);
 
-
+    // 檢查並更新 bookings 表結構
+    console.log('檢查 bookings 表結構...');
+    
+    // 檢查 payment_number 欄位是否存在
+    const [columns] = await connection.execute(`
+      SELECT COLUMN_NAME 
+      FROM INFORMATION_SCHEMA.COLUMNS 
+      WHERE TABLE_SCHEMA = DATABASE() 
+      AND TABLE_NAME = 'bookings' 
+      AND COLUMN_NAME = 'payment_number'
+    `);
+    
+    if (columns.length === 0) {
+      console.log('新增 payment_number 欄位...');
+      await connection.execute(`
+        ALTER TABLE bookings 
+        ADD COLUMN payment_number VARCHAR(100) NULL
+      `);
+    }
+    
+    // 檢查 payment_date 欄位是否存在
+    const [dateColumns] = await connection.execute(`
+      SELECT COLUMN_NAME 
+      FROM INFORMATION_SCHEMA.COLUMNS 
+      WHERE TABLE_SCHEMA = DATABASE() 
+      AND TABLE_NAME = 'bookings' 
+      AND COLUMN_NAME = 'payment_date'
+    `);
+    
+    if (dateColumns.length === 0) {
+      console.log('新增 payment_date 欄位...');
+      await connection.execute(`
+        ALTER TABLE bookings 
+        ADD COLUMN payment_date DATETIME NULL
+      `);
+    }
+    
+    // 檢查 payment_type 欄位是否存在
+    const [typeColumns] = await connection.execute(`
+      SELECT COLUMN_NAME 
+      FROM INFORMATION_SCHEMA.COLUMNS 
+      WHERE TABLE_SCHEMA = DATABASE() 
+      AND TABLE_NAME = 'bookings' 
+      AND COLUMN_NAME = 'payment_type'
+    `);
+    
+    if (typeColumns.length === 0) {
+      console.log('新增 payment_type 欄位...');
+      await connection.execute(`
+        ALTER TABLE bookings 
+        ADD COLUMN payment_type VARCHAR(50) NULL
+      `);
+    }
     
     // 更新 status 欄位的 ENUM 值
     console.log('更新 status 欄位...');
