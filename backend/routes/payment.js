@@ -147,13 +147,16 @@ router.post('/callback', async (req, res) => {
       ]); 
 
       console.log(`✅ 更新訂單 ${bookingId} 付款資訊成功`);
+      logSuccess(bookingId, req.body);
       res.send('1|OK');
     } else {
       console.warn(`❗ RtnCode != 1，收到的是 ${RtnCode}`);
+      logError(req.body);
       res.send('0|FAIL');
     }
   } catch (err) {
     console.error('❌ callback 發生錯誤:', err);
+    logError(req.body);
     res.send('0|FAIL');
   }
 });
