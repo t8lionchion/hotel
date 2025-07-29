@@ -9,8 +9,8 @@ const options = {
   MerchantID: '2000132',
   HashKey: '5294y06JbISpM5x9',
   HashIV: 'v77hoKGq4kWxNNIS',
-  ReturnURL: 'http://hosttest250723.ddns.net/api/payment/callback',
-  ClientBackURL: 'http://hosttest250723.ddns.net/bookings.html'
+  ReturnURL: 'https://hosttest250723.ddns.net/api/payment/callback',
+  ClientBackURL: 'https://hosttest250723.ddns.net/bookings.html'
 };
 
 // ✅ 建立綠界付款訂單（aio）- 原始路由
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
       PaymentType: 'aio',
       EncryptType: 1,
       CustomField1: bookingId?.toString() || 'noid',
-      OrderResultURL: 'http://hosttest250723.ddns.net/bookings.html'
+      OrderResultURL: 'https://hosttest250723.ddns.net/bookings.html'
 
     };
 
@@ -85,7 +85,7 @@ router.post('/create-order', (req, res) => {
       PaymentType: 'aio',
       EncryptType: 1,
       CustomField1: bookingId?.toString() || 'noid',
-      OrderResultURL: 'http://hosttest250723.ddns.net/bookings.html'
+      OrderResultURL: 'https://hosttest250723.ddns.net/bookings.html'
     };
 
     const create = new ecpay_payment(options);
@@ -107,16 +107,15 @@ router.post('/create-order', (req, res) => {
     });
   }
 });
+const { logSuccess, logError } = require('../log/ecpayCallbackLog'); // ✅ 引入 log 模組
 
-// ✅ 綠界付款完成後回呼（ReturnURL）
 router.post('/callback', async (req, res) => {
   try {
-    // ✅ 印出完整內容觀察（很重要）
-    console.log('🔁 綠界 callback req.body：', req.body);
+    console.log('🔁 callback req.body:', req.body);
 
     const {
       RtnCode,
-      CustomField1, // bookingId
+      CustomField1,
       PaymentDate,
       PaymentType,
       TradeNo,
@@ -127,8 +126,7 @@ router.post('/callback', async (req, res) => {
     if (RtnCode === '1' || RtnCode === 1) {
       const bookingId = CustomField1;
 
-      await pool.execute(
-        `
+   await pool.execute(`
         UPDATE bookings SET
           payment_status = 'confirmed',
           payment_method = ?,
@@ -138,28 +136,28 @@ router.post('/callback', async (req, res) => {
           ecpay_merchant_trade_no = ?,
           ecpay_payment_date = ?
         WHERE bookingId = ?
-      `,
-        [
-          PaymentMethod || null,
-          PaymentDate || null,
-          TradeNo || null,
-          PaymentType || null,
-          MerchantTradeNo || null,
-          PaymentDate || null,
-          bookingId
-        ]
-      );
+      `, [
+        PaymentMethod || null,
+        PaymentDate || null,
+        TradeNo || null,
+        PaymentType || null,
+        MerchantTradeNo || null,
+        PaymentDate || null,
+        bookingId
+      ]); 
 
-      console.log(`✅ 綠界通知成功：訂單 ${bookingId} 已更新付款資訊`);
+      console.log(`✅ 更新訂單 ${bookingId} 付款資訊成功`);
       res.send('1|OK');
     } else {
-      console.warn('❗ 綠界通知失敗：RtnCode ≠ 1，收到的是', RtnCode);
+      console.warn(`❗ RtnCode != 1，收到的是 ${RtnCode}`);
       res.send('0|FAIL');
     }
   } catch (err) {
-    console.error('❌ 綠界 callback 錯誤：', err);
+    console.error('❌ callback 發生錯誤:', err);
     res.send('0|FAIL');
   }
 });
+
+ 
 
 module.exports = router;
