@@ -17,7 +17,12 @@ const backend_report = require('./routes/backend_report');
 const app = express();
 const paymentRoutes = require('./routes/payment');   
 // 中間件
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -71,9 +76,9 @@ async function startServer() {
     
     // 啟動伺服器
     app.listen(config.server.port, () => {
-      console.log(`🚀 伺服器已啟動在 http://hosttest250723.ddns.net:${config.server.port}`);
-      console.log(`📊 健康檢查: http://hosttest250723.ddns.net:${config.server.port}/health`);
-      console.log(`🔗 API 端點: http://hosttest250723.ddns.net:${config.server.port}/api`);
+      console.log(`🚀 伺服器已啟動在 https://hosttest250723.ddns.net:${config.server.port}`);
+      console.log(`📊 健康檢查: https://hosttest250723.ddns.net:${config.server.port}/health`);
+      console.log(`🔗 API 端點: https://hosttest250723.ddns.net:${config.server.port}/api`);
     });
   } catch (error) {
     console.error('❌ 伺服器啟動失敗:', error);

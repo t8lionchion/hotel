@@ -6,9 +6,9 @@ const {pool} = require('../database'); // ✅ 一定要放在最上方，才能�
 
 // ✅ 測試金鑰
 const options = {
-  MerchantID: '2000132',
-  HashKey: '5294y06JbISpM5x9',
-  HashIV: 'v77hoKGq4kWxNNIS',
+  MerchantID: '3002607',
+  HashKey: 'pwFHCqoQZGmho4w6',
+  HashIV: 'EkRm7iFT261dpevs',
   ReturnURL: 'https://hosttest250723.ddns.net/api/payment/callback',
   ClientBackURL: 'https://hosttest250723.ddns.net/bookings.html'
 };
@@ -128,14 +128,14 @@ router.post('/callback', async (req, res) => {
 
    await pool.execute(`
         UPDATE bookings SET
-          payment_status = 'confirmed',
+          payment_status = 'paid',
           payment_method = ?,
           payment_date = ?,
           payment_number = ?,
           payment_type = ?,
           ecpay_merchant_trade_no = ?,
           ecpay_payment_date = ?
-        WHERE bookingId = ?
+        WHERE id = ?
       `, [
         PaymentMethod || null,
         PaymentDate || null,
@@ -161,6 +161,42 @@ router.post('/callback', async (req, res) => {
   }
 });
 
- 
+
+router.get('/status', async (req, res) => {
+  try {
+    const { bookingId } = req.query;
+
+    if (!bookingId) {
+      return res.status(400).json({
+        success: false,
+        message: '缺少 bookingId'
+      });
+    }
+
+    const [rows] = await pool.execute(
+      'SELECT payment_status FROM bookings WHERE id = ?',
+      [bookingId]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: '找不到對應的訂單'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      payment_status: rows[0].payment_status
+    });
+  } catch (err) {
+    console.error('❌ 取得訂單狀態失敗:', err);
+    res.status(500).json({
+      success: false,
+      message: '取得訂單狀態失敗',
+      error: err.message
+    });
+  }
+});
 
 module.exports = router;
